@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quizzes - Estuda Já</title>
+
+    <link rel="stylesheet" href="sty.css">
+</head>
+
+<body>
+
+    <aside class="menu">
+
+        <div class="logo-menu">
+            <span>📚</span>
+            <h2>Estude Já</h2>
+        </div>
+
+        <a href="sobre-nos.html">📖 Sobre nós</a>
+        <a href="video-aulas.html">▶️ Vídeo Aulas</a>
+        <a href="atividades.html">📝 Atividades</a>
+        <a href="meu-progresso.html">📊 Meu Progresso</a>
+        <a href="materias.html">📚 Matérias</a>
+        <a href="quizzes.html" class="ativo">❓ Quizzes</a>
+        <a href="nivel-aprendizagem.html">⭐ Nível de Aprendizagem</a>
+
+    </aside>
+
+
+
+    <main class="principal">
+
+        <header class="topo">
+
+            <input
+                type="text"
+                placeholder="Pesquisar...">
+
+            <button class="botao-pesquisa">🔍</button>
+
+            <a href="login.html" class="botao-login">👤 Entrar</a>
+
+        </header>
+
+
+        <section class="conteudo">
+
+            <div class="cabecalho-pagina">
+                <h1>Quizzes disponíveis</h1>
+                <p>Escolha um assunto e teste o que você aprendeu.</p>
+            </div>
+
+
+            <div class="filtros">
+                <button class="pilula ativa" data-filtro="todos">Todos</button>
+                <button class="pilula" data-filtro="matematica">Matemática</button>
+                <button class="pilula" data-filtro="portugues">Português</button>
+                <button class="pilula" data-filtro="ciencias">Ciências</button>
+                <button class="pilula" data-filtro="historia">História</button>
+                <button class="pilula" data-filtro="geografia">Geografia</button>
+            </div>
+
+
+            <div class="quiz-grid" id="gradeQuizzes">
+
+                <div class="quiz-card" data-assunto="matematica">
+                    <div class="quiz-top">
+                        <div class="quiz-icone">❓</div>
+                        <span class="selo facil">Fácil</span>
+                    </div>
+                    <p class="assunto">Matemática</p>
+                    <h3>Frações</h3>
+                    <div class="quiz-meta">
+                        <span>📝 10 perguntas</span>
+                        <span>⏱ 12 min</span>
+                    </div>
+                    <a href="#" class="botao">Começar quiz</a>
+                </div>
+
+                <div class="quiz-card" data-assunto="portugues">
+                    <div class="quiz-top">
+                        <div class="quiz-icone">❓</div>
+                        <span class="selo medio">Médio</span>
+                    </div>
+                    <p class="assunto">Português</p>
+                    <h3>Interpretação de Texto</h3>
+                    <div class="quiz-meta">
+                        <span>📝 12 perguntas</span>
+                        <span>⏱ 15 min</span>
+                    </div>
+                    <a href="#" class="botao verde">Começar quiz</a>
+                </div>
+
+                <div class="quiz-card" data-assunto="ciencias">
+                    <div class="quiz-top">
+                        <div class="quiz-icone">❓</div>
+                        <span class="selo facil">Fácil</span>
+                    </div>
+                    <p class="assunto">Ciências</p>
+                    <h3>Sistema Solar</h3>
+                    <div class="quiz-meta">
+                        <span>📝 8 perguntas</span>
+                        <span>⏱ 10 min</span>
+                    </div>
+                    <a href="#" class="botao">Começar quiz</a>
+                </div>
+
+                <div class="quiz-card" data-assunto="historia">
+                    <div class="quiz-top">
+                        <div class="quiz-icone">❓</div>
+                        <span class="selo dificil">Difícil</span>
+                    </div>
+                    <p class="assunto">História</p>
+                    <h3>Brasil Colônia</h3>
+                    <div class="quiz-meta">
+                        <span>📝 15 perguntas</span>
+                        <span>⏱ 18 min</span>
+                    </div>
+                    <a href="#" class="botao verde">Começar quiz</a>
+                </div>
+
+                <div class="quiz-card" data-assunto="matematica">
+                    <div class="quiz-top">
+                        <div class="quiz-icone">❓</div>
+                        <span class="selo medio">Médio</span>
+                    </div>
+                    <p class="assunto">Matemática</p>
+                    <h3>Equações do 1º grau</h3>
+                    <div class="quiz-meta">
+                        <span>📝 10 perguntas</span>
+                        <span>⏱ 14 min</span>
+                    </div>
+                    <a href="#" class="botao">Começar quiz</a>
+                </div>
+
+                <div class="quiz-card" data-assunto="geografia">
+                    <div class="quiz-top">
+                        <div class="quiz-icone">❓</div>
+                        <span class="selo facil">Fácil</span>
+                    </div>
+                    <p class="assunto">Geografia</p>
+                    <h3>Continentes e Oceanos</h3>
+                    <div class="quiz-meta">
+                        <span>📝 10 perguntas</span>
+                        <span>⏱ 11 min</span>
+                    </div>
+                    <a href="#" class="botao verde">Começar quiz</a>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        // Filtro simples de quizzes por matéria (só front-end, sem back-end)
+        const botoesFiltro = document.querySelectorAll('.filtros .pilula');
+        const cards = document.querySelectorAll('#gradeQuizzes .quiz-card');
+
+        botoesFiltro.forEach(botao => {
+            botao.addEventListener('click', () => {
+                botoesFiltro.forEach(b => b.classList.remove('ativa'));
+                botao.classList.add('ativa');
+
+                const filtro = botao.dataset.filtro;
+
+                cards.forEach(card => {
+                    const mostrar = filtro === 'todos' || card.dataset.assunto === filtro;
+                    card.style.display = mostrar ? '' : 'none';
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Estuda Já</title>
+    <title>Matérias - Estuda Já</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sty.css">
 </head>
 
 <body>
@@ -18,11 +18,12 @@
             <span>📚</span>
             <h2>Estude Já</h2>
         </div>
-        <a href="materiais-de-aula.html">📖 Materiais de Aula</a>
+
+        <a href="sobre-nos.html">📖 Sobre nós</a>
         <a href="video-aulas.html">▶️ Vídeo Aulas</a>
         <a href="atividades.html">📝 Atividades</a>
         <a href="meu-progresso.html">📊 Meu Progresso</a>
-        <a href="materias.html">📚 Matérias</a>
+        <a href="materias.html" class="ativo">📚 Matérias</a>
         <a href="quizzes.html">❓ Quizzes</a>
         <a href="nivel-aprendizagem.html">⭐ Nível de Aprendizagem</a>
 
@@ -36,71 +37,38 @@
 
             <input
                 type="text"
-                placeholder="Pesquisar...">
+                placeholder="Pesquisar matéria...">
 
             <button class="botao-pesquisa">🔍</button>
+
+            <a href="login.html" class="botao-login">👤 Entrar</a>
 
         </header>
 
 
         <section class="conteudo">
 
-            <div class="titulo">
-
-                <h1>📚 ESTUDE <span>JÁ</span></h1>
-
-                <p>Aprenda, Pratique e Evolua!</p>
-
+            <div class="cabecalho-pagina">
+                <h1>Matérias</h1>
+                <p>Escolha uma matéria para começar seus estudos!</p>
             </div>
 
 
             <div class="containers">
 
-                <div class="container">
+                <!-- Matéria em andamento: recebe a classe "selecionada" para o destaque -->
+                <div class="container selecionada">
 
                     <div class="cabecalho-container">
-                        Container 1
+                        Matemática
                     </div>
 
                     <div class="corpo-container">
-                        <h3>Explore novos materiais</h3>
-
                         <p>
-                            Descubra conteúdos para você!
+                            Aprenda álgebra, geometria, funções e muito mais.
                         </p>
-                    </div>
 
-                </div>
-
-
-                <div class="container">
-
-                    <div class="cabecalho-container">
-                        Container 2
-                    </div>
-
-                    <div class="corpo-container">
-                        <h3>Assista vídeoaulas</h3>
-
-                        <p>
-                            Aprenda com nossos professores!
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="container">
-
-                    <div class="cabecalho-container">
-                        Container 3
-                    </div>
-
-                    <div class="corpo-container">
-                        <h3>Organize seu cronograma</h3>
-                        <p>
-                            Planeje seus estudos!
-                        </p>
+                        <a href="#" class="botao verde">Entrar</a>
                     </div>
 
                 </div>
@@ -109,14 +77,49 @@
                 <div class="container">
 
                     <div class="cabecalho-container roxo">
-                        Container 4
+                        Português
                     </div>
 
                     <div class="corpo-container">
-                        <h3>Organize seu cronograma</h3>
                         <p>
-                            Planeje seus estudos!
+                            Estude gramática, interpretação de texto e redação.
                         </p>
+
+                        <a href="#" class="botao">Entrar</a>
+                    </div>
+
+                </div>
+
+
+                <div class="container">
+
+                    <div class="cabecalho-container">
+                        História
+                    </div>
+
+                    <div class="corpo-container">
+                        <p>
+                            Explore acontecimentos históricos do Brasil e do mundo.
+                        </p>
+
+                        <a href="#" class="botao verde">Entrar</a>
+                    </div>
+
+                </div>
+
+
+                <div class="container">
+
+                    <div class="cabecalho-container roxo">
+                        Biologia
+                    </div>
+
+                    <div class="corpo-container">
+                        <p>
+                            Aprenda genética, corpo humano e ecologia.
+                        </p>
+
+                        <a href="#" class="botao">Entrar</a>
                     </div>
 
                 </div>
@@ -125,23 +128,16 @@
 
 
             <div class="mensagem">
-
-                <span>🚀</span>
+                <span>📖</span>
 
                 <div>
-                    <h2>Dê o seu melhor todos os dias!</h2>
-
-                    <p>
-                        Você é capaz de conquistar seus sonhos!
-                    </p>
+                    <h2>Continue evoluindo todos os dias!</h2>
                 </div>
-
             </div>
 
         </section>
 
     </main>
-
 
 </body>
 
