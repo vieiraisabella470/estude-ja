@@ -1033,3 +1033,220 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+
+
+/*login, cadastro, senha */
+
+body.pagina-auth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100vh;
+    width: 100%;
+
+    background-color: #5720b7;
+
+
+    padding: 60px 20px;
+}
+
+/* A "caixa fechada" com o formulário */
+.caixa-auth {
+    width: 100%;
+    max-width: 380px;
+
+    background-color: white;
+    border-radius: 12px;
+    padding: 35px 30px;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+.logo-auth {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    font-size: 22px;
+    font-weight: bold;
+    color: #392075;
+
+    margin-bottom: 22px;
+}
+
+.logo-auth .destaque {
+    color: #42a88d;
+}
+
+.link-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    font-size: 13px;
+    font-weight: bold;
+    color: #888;
+    text-decoration: none;
+
+    margin-bottom: 18px;
+}
+
+.link-voltar:hover {
+    color: #6724c7;
+}
+
+.auth-titulo {
+    text-align: center;
+    color: #392075;
+    font-size: 22px;
+    margin-bottom: 6px;
+}
+
+.auth-subtitulo {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 26px;
+}
+
+.campo {
+    margin-bottom: 16px;
+}
+
+.campo label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.campo input {
+    width: 100%;
+    padding: 12px 14px;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+
+    outline: none;
+}
+
+.campo input:focus {
+    border-color: #42a88d;
+}
+
+.mensagem-erro {
+    color: #c1443e;
+    font-size: 12px;
+    margin-top: 5px;
+    min-height: 14px;
+}
+
+.linha-opcoes {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    margin-top: -6px;
+}
+
+.linha-opcoes a {
+    font-size: 13px;
+    font-weight: bold;
+    color: #6724c7;
+    text-decoration: none;
+}
+
+.linha-opcoes a:hover {
+    text-decoration: underline;
+}
+
+.checkbox-termos {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+
+    font-size: 12.5px;
+    color: #666;
+
+    margin-bottom: 20px;
+}
+
+.checkbox-termos input {
+    margin-top: 3px;
+    accent-color: #6724c7;
+    cursor: pointer;
+}
+
+.checkbox-termos a {
+    color: #6724c7;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.checkbox-termos a:hover {
+    text-decoration: underline;
+}
+
+.botao-auth {
+    width: 100%;
+    text-align: center;
+    padding: 13px;
+    font-size: 15px;
+    border: none;
+}
+
+.status-auth {
+    display: none;
+
+    margin-top: 14px;
+    padding: 10px 12px;
+
+    border-radius: 8px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.status-auth.mostrar {
+    display: block;
+}
+
+.status-auth.erro {
+    background-color: rgba(224, 85, 79, 0.1);
+    border: 1px solid #e0554f;
+    color: #c1443e;
+}
+
+.status-auth.sucesso {
+    background-color: rgba(66, 168, 141, 0.12);
+    border: 1px solid #42a88d;
+    color: #368c76;
+}
+
+.rodape-auth {
+    text-align: center;
+    margin-top: 22px;
+    font-size: 13.5px;
+    color: #666;
+}
+
+.rodape-auth a {
+    color: #6724c7;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.rodape-auth a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .caixa-auth {
+        padding: 28px 22px;
+    }
+}

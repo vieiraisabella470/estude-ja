@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Criar conta - Estuda Já</title>
+
+    <link rel="stylesheet" href="sty.css">
+</head>
+
+<body class="pagina-auth">
+
+    <div class="caixa-auth">
+
+        <div class="logo-auth">
+            <span>📚</span>
+            <span>Estuda <span class="destaque">Já</span></span>
+        </div>
+
+        <h1 class="auth-titulo">Crie sua conta</h1>
+        <p class="auth-subtitulo">Comece a estudar de graça agora mesmo</p>
+
+        <form id="formCadastro" novalidate>
+
+            <div class="campo">
+                <label for="nome">Nome completo</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome">
+                <p class="mensagem-erro" id="erroNome"></p>
+            </div>
+
+            <div class="campo">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com">
+                <p class="mensagem-erro" id="erroEmail"></p>
+            </div>
+
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="Crie uma senha">
+                <p class="mensagem-erro" id="erroSenha"></p>
+            </div>
+
+            <div class="campo">
+                <label for="confirmarSenha">Confirmar senha</label>
+                <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Digite a senha novamente">
+                <p class="mensagem-erro" id="erroConfirmarSenha"></p>
+            </div>
+
+            <div class="checkbox-termos">
+                <input type="checkbox" id="termos" name="termos">
+                <label for="termos">Eu li e aceito os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a>.</label>
+            </div>
+            <p class="mensagem-erro" id="erroTermos" style="margin-top: -12px; margin-bottom: 12px;"></p>
+
+            <button type="submit" class="botao verde botao-auth" id="botaoCadastrar">Criar conta</button>
+
+            <div class="status-auth" id="statusCadastro"></div>
+
+        </form>
+
+        <p class="rodape-auth">Já tem uma conta? <a href="login.html">Entrar</a></p>
+
+    </div>
+
+    <script>
+        const formulario = document.getElementById('formCadastro');
+        const campoNome = document.getElementById('nome');
+        const campoEmail = document.getElementById('email');
+        const campoSenha = document.getElementById('senha');
+        const campoConfirmarSenha = document.getElementById('confirmarSenha');
+        const campoTermos = document.getElementById('termos');
+
+        const erroNome = document.getElementById('erroNome');
+        const erroEmail = document.getElementById('erroEmail');
+        const erroSenha = document.getElementById('erroSenha');
+        const erroConfirmarSenha = document.getElementById('erroConfirmarSenha');
+        const erroTermos = document.getElementById('erroTermos');
+
+        const status = document.getElementById('statusCadastro');
+        const botaoCadastrar = document.getElementById('botaoCadastrar');
+
+        function emailValido(valor) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
+        }
+
+        formulario.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            erroNome.textContent = '';
+            erroEmail.textContent = '';
+            erroSenha.textContent = '';
+            erroConfirmarSenha.textContent = '';
+            erroTermos.textContent = '';
+            status.className = 'status-auth';
+            status.textContent = '';
+
+            let valido = true;
+            const nomeValor = campoNome.value.trim();
+            const emailValor = campoEmail.value.trim();
+            const senhaValor = campoSenha.value;
+            const confirmarValor = campoConfirmarSenha.value;
+
+            if (!nomeValor) {
+                erroNome.textContent = 'Informe seu nome completo.';
+                valido = false;
+            }
+
+            if (!emailValor) {
+                erroEmail.textContent = 'Informe seu e-mail.';
+                valido = false;
+            } else if (!emailValido(emailValor)) {
+                erroEmail.textContent = 'Informe um e-mail válido.';
+                valido = false;
+            }
+
+            if (!senhaValor) {
+                erroSenha.textContent = 'Crie uma senha.';
+                valido = false;
+            } else if (senhaValor.length < 6) {
+                erroSenha.textContent = 'A senha deve ter ao menos 6 caracteres.';
+                valido = false;
+            }
+
+            if (!confirmarValor) {
+                erroConfirmarSenha.textContent = 'Confirme sua senha.';
+                valido = false;
+            } else if (confirmarValor !== senhaValor) {
+                erroConfirmarSenha.textContent = 'As senhas não coincidem.';
+                valido = false;
+            }
+
+            if (!campoTermos.checked) {
+                erroTermos.textContent = 'Você precisa aceitar os termos para continuar.';
+                valido = false;
+            }
+
+            if (!valido) return;
+
+            botaoCadastrar.disabled = true;
+            botaoCadastrar.textContent = 'Criando conta...';
+
+            // Aqui é só a validação do front-end. Quando o back-end
+            // estiver pronto, troque este trecho pela chamada real de cadastro.
+            setTimeout(function () {
+                status.className = 'status-auth mostrar sucesso';
+                status.textContent = 'Cadastro validado! Redirecionando para o site...';
+                botaoCadastrar.textContent = 'Redirecionando...';
+
+                setTimeout(function () {
+                    window.location.href = 'sobre-nos.html';
+                }, 1200);
+            }, 700);
+        });
+    </script>
+
+</body>
+
+</html>

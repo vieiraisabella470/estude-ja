@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recuperar senha - Estuda Já</title>
+
+    <link rel="stylesheet" href="sty.css">
+</head>
+
+<body class="pagina-auth">
+
+    <div class="caixa-auth">
+
+        <a href="login.html" class="link-voltar">← Voltar para o login</a>
+
+        <div class="logo-auth">
+            <span>📚</span>
+            <span>Estuda <span class="destaque">Já</span></span>
+        </div>
+
+        <h1 class="auth-titulo">Esqueceu a senha?</h1>
+        <p class="auth-subtitulo">Digite seu e-mail e enviaremos um link para você criar uma nova senha.</p>
+
+        <form id="formRecuperar" novalidate>
+
+            <div class="campo">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com">
+                <p class="mensagem-erro" id="erroEmail"></p>
+            </div>
+
+            <button type="submit" class="botao verde botao-auth" id="botaoEnviar">Enviar link de recuperação</button>
+
+            <div class="status-auth" id="statusRecuperar"></div>
+
+        </form>
+
+        <p class="rodape-auth">Lembrou a senha? <a href="login.html">Entrar</a></p>
+        <p class="rodape-auth" style="margin-top: 6px;">Não tem uma conta? <a href="cadastro.html">Inscreva-se</a></p>
+
+    </div>
+
+    <script>
+        const formulario = document.getElementById('formRecuperar');
+        const campoEmail = document.getElementById('email');
+        const erroEmail = document.getElementById('erroEmail');
+        const status = document.getElementById('statusRecuperar');
+        const botaoEnviar = document.getElementById('botaoEnviar');
+
+        function emailValido(valor) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valor);
+        }
+
+        formulario.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            erroEmail.textContent = '';
+            status.className = 'status-auth';
+            status.textContent = '';
+
+            const emailValor = campoEmail.value.trim();
+
+            if (!emailValor) {
+                erroEmail.textContent = 'Informe seu e-mail.';
+                return;
+            }
+            if (!emailValido(emailValor)) {
+                erroEmail.textContent = 'Informe um e-mail válido.';
+                return;
+            }
+
+            botaoEnviar.disabled = true;
+            botaoEnviar.textContent = 'Enviando...';
+
+            // Aqui é só a validação do front-end. Quando o back-end
+            // estiver pronto, troque este trecho pelo envio real do e-mail.
+            setTimeout(function () {
+                botaoEnviar.disabled = false;
+                botaoEnviar.textContent = 'Enviar link de recuperação';
+                status.className = 'status-auth mostrar sucesso';
+                status.textContent = 'Se esse e-mail existir, enviaremos um link de recuperação em instantes.';
+            }, 700);
+        });
+    </script>
+
+</body>
+
+</html>
