@@ -1,0 +1,1035 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    display: flex;
+}
+
+
+
+/*MENU LATERAL */
+
+.menu {
+    width: 235px;
+    min-height: 100vh;
+    background-color: #5720b7;
+    padding: 25px 15px;
+}
+
+
+
+.logo-menu {
+    background-color: #42a88d;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.logo-menu h2 {
+    font-size: 20px;
+}
+
+
+.menu button,
+.menu a {
+    width: 100%;
+    padding: 15px 10px;
+
+    background: none;
+    border: none;
+
+    color: white;
+    text-align: left;
+    text-decoration: none;
+
+    font-size: 16px;
+    cursor: pointer;
+
+    margin-bottom: 10px;
+
+    display: block;
+    border-radius: 5px;
+}
+
+
+.menu button:hover,
+.menu a:hover {
+    background-color: #6d36ca;
+}
+
+
+/* ITEM ATIVO: a página em que o usuário está */
+.menu a.ativo {
+    background-color: #42a88d;
+    font-weight: bold;
+}
+
+.menu a.ativo:hover {
+    background-color: #42a88d;
+}
+
+
+
+/* ÁREA PRINCIPAL */
+
+.principal {
+    width: calc(100% - 235px);
+}
+
+
+.topo {
+    height: 90px;
+
+    background-color: #5c21bd;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+
+.topo input {
+    width: 60%;
+    height: 50px;
+
+    border: none;
+    border-radius: 15px 0 0 15px;
+
+    padding: 0 20px;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+
+
+.botao-pesquisa {
+    height: 50px;
+    width: 55px;
+
+    border: none;
+
+    background-color: white;
+
+    border-radius: 0 15px 15px 0;
+
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+
+/* BOTÃO DE LOGIN (cabeçalho) */
+.botao-login {
+    height: 50px;
+
+    padding: 0 22px;
+
+    border: none;
+    border-radius: 15px;
+
+    background-color: #42a88d;
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    cursor: pointer;
+}
+
+.botao-login:hover {
+    background-color: #368c76;
+}
+
+
+/* CONTEÚDO */
+.conteudo {
+    max-width: 1000px;
+
+    margin: auto;
+
+    padding: 25px;
+}
+
+
+
+/* TÍTULO DA HOME (hero grande, centralizado)  */
+.titulo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.titulo h1 {
+    color: #392075;
+    font-size: 35px;
+}
+
+.titulo h1 span {
+    color: #42a88d;
+}
+
+.titulo p {
+    color: #368c76;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+
+/*CABEÇALHO DAS PÁGINAS INTERNAS (Matérias, Vídeo Aulas, Atividades...)*/
+.cabecalho-pagina {
+    margin-bottom: 25px;
+}
+
+.cabecalho-pagina h1 {
+    color: #392075;
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.cabecalho-pagina p {
+    color: #666;
+    font-size: 16px;
+}
+
+
+/* Barra de busca dentro do conteúdo  */
+.busca-pagina {
+    display: flex;
+    max-width: 500px;
+    margin: 20px 0;
+}
+
+.busca-pagina input {
+    flex: 1;
+    height: 48px;
+    border: 1px solid #ddd;
+    border-radius: 10px 0 0 10px;
+    padding: 0 18px;
+    font-size: 15px;
+    outline: none;
+}
+
+.busca-pagina button {
+    width: 50px;
+    border: 1px solid #ddd;
+    border-left: none;
+    background-color: #f5f5f5;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+/* Todas / Matemática / História... */
+.filtros {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.pilula {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    background-color: white;
+    color: #555;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.pilula.ativa {
+    background-color: #42a88d;
+    border-color: #42a88d;
+    color: white;
+    font-weight: bold;
+}
+
+.pilula:hover {
+    border-color: #42a88d;
+}
+
+
+
+/*GRID GENÉRICO (usado na home e em Matérias)  */
+.containers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+
+
+.container {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+}
+
+/* destaque de card selecionado*/
+.container.selecionada {
+    border: 2px solid #42a88d;
+    box-shadow: 0 0 0 4px rgba(66, 168, 141, 0.15);
+}
+
+
+
+.cabecalho-container {
+    background-color: #42a88d;
+    color: white;
+    font-size: 21px;
+    font-weight: bold;
+    padding: 15px;
+}
+
+.cabecalho-container.roxo {
+    background-color: #6724c7;
+}
+
+
+/* CORPO DOS CONTAINERS */
+.corpo-container {
+    padding: 20px;
+    min-height: 100px;
+}
+
+.corpo-container h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.corpo-container p {
+    color: #555;
+}
+
+
+/* Botões usados dentro dos cards (Entrar, Resolver, Continuar...) */
+.botao {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 8px;
+    background-color: #6724c7;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.botao:hover {
+    background-color: #5720b7;
+}
+
+.botao.verde {
+    background-color: #42a88d;
+}
+
+.botao.verde:hover {
+    background-color: #368c76;
+}
+
+
+/* MENSAGEM DE INCENTIVO  */
+.mensagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 35px;
+    text-align: center;
+}
+
+.mensagem span {
+    font-size: 50px;
+}
+
+.mensagem h2 {
+    color: #392075;
+}
+
+.mensagem p {
+    color: #333;
+    margin-top: 5px;
+}
+
+
+
+/* PÁGINA DE VÍDEO AULAS */
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.video-card {
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.video-thumb {
+    position: relative;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(135deg, #5720b7, #42a88d);
+    color: white;
+    font-size: 40px;
+}
+
+.video-thumb .duracao {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 5px;
+}
+
+.video-info {
+    padding: 15px;
+}
+
+.video-info h3 {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.video-info .professor {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.video-info .tempo {
+    color: #888;
+    font-size: 13px;
+}
+
+
+/* LISTA DE ITENS (Atividades e Materiais de Aula) */
+
+.lista-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.item-lista {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    padding: 20px;
+
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.item-icone {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 26px;
+    color: white;
+
+    background: linear-gradient(135deg, #5720b7, #42a88d);
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-info h3 {
+    color: #333;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.item-info .professor {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.item-info .meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    color: #888;
+    font-size: 13px;
+}
+
+.item-lista .botao {
+    margin-top: 0;
+    flex-shrink: 0;
+}
+
+
+
+
+
+
+
+/*  RESPONSIVO */
+
+@media (max-width: 700px) {
+
+    .menu {
+        width: 180px;
+    }
+
+    .principal {
+        width: calc(100% - 180px);
+    }
+
+    .containers {
+        grid-template-columns: 1fr;
+    }
+
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .topo input {
+        width: 70%;
+    }
+
+    .busca-pagina {
+        max-width: 100%;
+    }
+    
+    .item-lista {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .item-lista .botao {
+        width: 100%;
+        text-align: center;
+    }
+
+    .quiz-grid,
+    .achv-grid,
+    .stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .progress-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .level-hero {
+        padding: 20px;
+    }
+}
+
+
+
+/* ===========================================================
+   PÁGINA DE QUIZZES
+   =========================================================== */
+
+.quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.quiz-card {
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.quiz-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.quiz-icone {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    color: white;
+
+    background: linear-gradient(135deg, #5720b7, #42a88d);
+}
+
+.selo {
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.selo.facil {
+    background-color: rgba(66, 168, 141, 0.15);
+    color: #368c76;
+}
+
+.selo.medio {
+    background-color: rgba(245, 166, 35, 0.18);
+    color: #a3690c;
+}
+
+.selo.dificil {
+    background-color: rgba(224, 85, 79, 0.15);
+    color: #c1443e;
+}
+
+.quiz-card h3 {
+    color: #333;
+    font-size: 16px;
+}
+
+.quiz-card .assunto {
+    color: #888;
+    font-size: 13px;
+    margin-top: -8px;
+}
+
+.quiz-meta {
+    display: flex;
+    gap: 14px;
+
+    color: #888;
+    font-size: 13px;
+}
+
+.quiz-card .botao {
+    text-align: center;
+    margin-top: 4px;
+}
+
+
+
+/* ===========================================================
+   PÁGINA DE NÍVEL DE APRENDIZAGEM
+   =========================================================== */
+
+.nivel-hero {
+    background: linear-gradient(120deg, #6724c7, #392075);
+    color: white;
+    border-radius: 12px;
+    padding: 28px;
+
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+
+    margin-bottom: 30px;
+}
+
+.nivel-selo-grande {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.nivel-hero-texto {
+    flex: 1;
+    min-width: 220px;
+}
+
+.nivel-hero-texto .rotulo {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.85;
+    font-weight: bold;
+}
+
+.nivel-hero-texto h2 {
+    margin: 4px 0 12px;
+    font-size: 22px;
+}
+
+.barra-xp-fundo {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    height: 10px;
+    max-width: 340px;
+    overflow: hidden;
+}
+
+.barra-xp-preenchida {
+    height: 100%;
+    background-color: #42a88d;
+    border-radius: 20px;
+}
+
+.xp-legenda {
+    font-size: 12.5px;
+    opacity: 0.9;
+    margin-top: 8px;
+}
+
+.titulo-secao {
+    color: #392075;
+    font-size: 19px;
+    margin-bottom: 16px;
+}
+
+.trilha-niveis {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.item-nivel {
+    text-align: center;
+    padding: 18px 10px;
+
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+.item-nivel .circulo {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    font-size: 17px;
+    color: white;
+}
+
+.item-nivel.concluido .circulo {
+    background-color: #42a88d;
+}
+
+.item-nivel.atual .circulo {
+    background-color: #6724c7;
+    box-shadow: 0 0 0 4px rgba(103, 36, 199, 0.18);
+}
+
+.item-nivel.bloqueado .circulo {
+    background-color: #eee;
+    color: #999;
+}
+
+.item-nivel h4 {
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.item-nivel p {
+    color: #888;
+    font-size: 12px;
+}
+
+.grade-conquistas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.conquista {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 18px;
+
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+.conquista-icone {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+}
+
+.conquista.desbloqueada .conquista-icone {
+    background-color: rgba(245, 166, 35, 0.18);
+}
+
+.conquista.bloqueada .conquista-icone {
+    background-color: #f0f0f0;
+    filter: grayscale(1);
+    opacity: 0.7;
+}
+
+.conquista.bloqueada h5,
+.conquista.bloqueada p {
+    opacity: 0.55;
+}
+
+.conquista h5 {
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.conquista p {
+    color: #888;
+    font-size: 12px;
+}
+
+
+
+/* ===========================================================
+   PÁGINA MEU PROGRESSO
+   =========================================================== */
+
+.grade-estatisticas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.cartao-estatistica {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 20px;
+
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.estatistica-icone {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+    color: white;
+}
+
+.estatistica-numero {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.1;
+}
+
+.estatistica-rotulo {
+    font-size: 12.5px;
+    color: #888;
+}
+
+.grade-progresso {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 18px;
+    align-items: start;
+    margin-bottom: 20px;
+}
+
+.cartao-progresso {
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.barras-grafico {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 150px;
+    margin-top: 18px;
+}
+
+.coluna-grafico {
+    flex: 1;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.barra-grafico {
+    width: 100%;
+    max-width: 30px;
+    border-radius: 6px 6px 3px 3px;
+    background: linear-gradient(180deg, #7b4fe8, #5720b7);
+}
+
+.coluna-grafico .dia {
+    font-size: 11px;
+    color: #888;
+    font-weight: bold;
+}
+
+.linha-materia {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.linha-materia:last-child {
+    margin-bottom: 0;
+}
+
+.linha-materia .nome {
+    width: 90px;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+}
+
+.linha-materia .barra-fundo {
+    flex: 1;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    height: 8px;
+    overflow: hidden;
+}
+
+.linha-materia .barra-preenchida {
+    height: 100%;
+    border-radius: 20px;
+    background-color: #42a88d;
+}
+
+.linha-materia .porcentagem {
+    width: 34px;
+    text-align: right;
+    font-size: 12.5px;
+    color: #888;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.linha-sequencia {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.dia-sequencia {
+    flex: 1;
+    aspect-ratio: 1;
+    border-radius: 7px;
+
+    background-color: #f0f0f0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 11px;
+    font-weight: bold;
+    color: #888;
+}
+
+.dia-sequencia.preenchido {
+    background-color: #42a88d;
+    color: white;
+}
+
+@media (max-width: 860px) {
+    .grade-progresso {
+        grid-template-columns: 1fr;
+    }
+}
