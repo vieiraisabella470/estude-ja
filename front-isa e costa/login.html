@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Entrar — Estuda Já</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple-deep: #3E2076;
+    --purple: #5B2FCE;
+    --purple-light: #7B4FE8;
+    --purple-btn: #5A2FD1;
+    --purple-btn-hover: #4A24B0;
+    --green: #2FBF71;
+    --green-dark: #1E9C5A;
+    --ink: #2B2540;
+    --ink-dim: #8C87A0;
+    --card-bg: #FFFFFF;
+    --field-bg: #F4F2FA;
+    --field-border: #E5E0F5;
+    --error: #E0554F;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: 'Nunito', system-ui, sans-serif;
+    background: radial-gradient(ellipse 1200px 800px at 30% 20%, var(--purple-light) 0%, var(--purple) 45%, var(--purple-deep) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    color: var(--ink);
+  }
+
+  .card {
+    width: 100%;
+    max-width: 380px;
+    background: var(--card-bg);
+    border-radius: 22px;
+    padding: 34px 30px 30px;
+    box-shadow: 0 30px 60px -20px rgba(20, 10, 50, 0.5);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-bottom: 24px;
+  }
+  .logo svg {
+    width: 34px; height: 34px;
+    flex-shrink: 0;
+    transform: rotate(-12deg);
+  }
+  .logo-text {
+    font-family: 'Fredoka', 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+  }
+  .logo-text .estuda {
+    color: var(--purple-deep);
+    text-shadow: 2px 2px 0 rgba(91, 47, 206, 0.15);
+  }
+  .logo-text .ja {
+    color: var(--green);
+    font-size: 28px;
+    text-shadow: 2px 2px 0 rgba(30, 156, 90, 0.18);
+  }
+
+  h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 6px;
+    color: var(--ink);
+  }
+  .sub {
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--ink-dim);
+    margin: 0 0 26px;
+    line-height: 1.5;
+  }
+
+  form { display: flex; flex-direction: column; gap: 14px; }
+
+  .field { display: flex; flex-direction: column; gap: 5px; }
+
+  .input-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--field-bg);
+    border: 1.5px solid var(--field-border);
+    border-radius: 12px;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .input-row:focus-within {
+    border-color: var(--purple);
+    background: #FFFFFF;
+  }
+  .input-row .icon {
+    width: 18px; height: 18px;
+    margin-left: 14px;
+    flex-shrink: 0;
+    color: var(--ink-dim);
+  }
+  .input-row input {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14.5px;
+    color: var(--ink);
+    padding: 13px 12px;
+  }
+  .input-row input::placeholder { color: var(--ink-dim); }
+
+  .toggle-vis {
+    background: none;
+    border: none;
+    color: var(--ink-dim);
+    font-size: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 14px 8px 6px;
+    flex-shrink: 0;
+  }
+  .toggle-vis:hover { color: var(--purple); }
+  .toggle-vis:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; border-radius: 6px; }
+
+  .field-msg {
+    font-size: 12px;
+    color: var(--error);
+    min-height: 14px;
+    margin: 0 2px;
+    line-height: 1.4;
+  }
+
+  .forgot-row { text-align: right; margin-top: -4px; }
+  .forgot-row a {
+    font-size: 13px;
+    color: var(--purple);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .forgot-row a:hover { text-decoration: underline; }
+
+  button.submit {
+    margin-top: 6px;
+    background: var(--purple-btn);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.05s ease;
+  }
+  button.submit:hover { background: var(--purple-btn-hover); }
+  button.submit:active { transform: scale(0.99); }
+  button.submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  button.submit:focus-visible { outline: 2px solid var(--purple); outline-offset: 2px; }
+
+  .status {
+    margin-top: 14px;
+    font-size: 12.5px;
+    padding: 9px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--field-border);
+    display: none;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .status.show { display: block; }
+  .status.error { color: var(--error); border-color: var(--error); background: rgba(224,85,79,0.07); }
+  .status.success { color: var(--green-dark); border-color: var(--green); background: rgba(47,191,113,0.08); }
+
+  .below {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 13.5px;
+    color: var(--ink-dim);
+  }
+  .below a { color: var(--purple); text-decoration: none; font-weight: 700; }
+  .below a:hover { text-decoration: underline; }
+
+  .illustration {
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+  }
+  .illustration svg { width: 100%; max-width: 260px; height: auto; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3L1 8l11 5 9-4.09V17h2V8L12 3z" fill="#2FBF71"/>
+        <path d="M5 10.18v4.32c0 .35.16.68.43.9C6.8 16.55 9.2 18 12 18s5.2-1.45 6.57-2.6c.27-.22.43-.55.43-.9v-4.32l-7 3.18-7-3.18z" fill="#5B2FCE"/>
+      </svg>
+      <span class="logo-text"><span class="estuda">Estuda</span> <span class="ja">Já</span></span>
+    </div>
+
+    <h1>Bem-vindo de volta!</h1>
+    <p class="sub">Faça login para continuar aprendendo</p>
+
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <div class="input-row">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l9 7 9-7"/><path d="M3 6h18v12H3z"/></svg>
+          <input type="email" id="email" name="email" placeholder="E-mail" autocomplete="email" required>
+        </div>
+        <p class="field-msg" id="emailMsg"></p>
+      </div>
+
+      <div class="field">
+        <div class="input-row">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <input type="password" id="password" name="password" placeholder="Digite sua senha" autocomplete="current-password" required minlength="6">
+          <button type="button" class="toggle-vis" id="toggleVis" aria-label="Mostrar senha">mostrar</button>
+        </div>
+        <p class="field-msg" id="passwordMsg"></p>
+      </div>
+
+      <div class="forgot-row">
+        <a href="#" id="forgotLink">Esqueceu a senha?</a>
+      </div>
+
+      <button type="submit" class="submit" id="submitBtn">Entrar</button>
+
+      <div class="status" id="status" role="alert"></div>
+    </form>
+
+    <p class="below">Não tem uma conta? <a href="#" id="signupLink">Inscreva-se</a></p>
+
+    <div class="illustration">
+      <svg viewBox="0 0 260 150" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="130" cy="138" rx="95" ry="8" fill="#EFEBFA"/>
+        <rect x="18" y="98" width="46" height="34" rx="3" fill="#5B2FCE"/>
+        <rect x="18" y="98" width="46" height="6" fill="#7B4FE8"/>
+        <rect x="24" y="112" width="34" height="4" rx="2" fill="#FFFFFF" opacity="0.7"/>
+        <rect x="24" y="120" width="24" height="4" rx="2" fill="#FFFFFF" opacity="0.5"/>
+        <rect x="80" y="60" width="100" height="66" rx="6" fill="#2B2540"/>
+        <rect x="87" y="67" width="86" height="52" rx="2" fill="#EFEBFA"/>
+        <circle cx="130" cy="93" r="14" fill="#5B2FCE"/>
+        <path d="M126 87l10 6-10 6z" fill="#fff"/>
+        <rect x="70" y="126" width="120" height="8" rx="4" fill="#3E2076"/>
+        <circle cx="205" cy="55" r="16" fill="#FFFFFF" stroke="#2FBF71" stroke-width="3"/>
+        <path d="M205 47v9l6 4" stroke="#2FBF71" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M230 95c-4-14-2-30 10-34" stroke="#2FBF71" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <circle cx="242" cy="58" r="9" fill="#2FBF71"/>
+        <circle cx="236" cy="70" r="6" fill="#2FBF71"/>
+      </svg>
+    </div>
+  </div>
+
+<script>
+  const form = document.getElementById('loginForm');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const emailMsg = document.getElementById('emailMsg');
+  const passwordMsg = document.getElementById('passwordMsg');
+  const status = document.getElementById('status');
+  const submitBtn = document.getElementById('submitBtn');
+  const toggleVis = document.getElementById('toggleVis');
+
+  toggleVis.addEventListener('click', () => {
+    const isPw = passwordInput.type === 'password';
+    passwordInput.type = isPw ? 'text' : 'password';
+    toggleVis.textContent = isPw ? 'ocultar' : 'mostrar';
+    toggleVis.setAttribute('aria-label', isPw ? 'Ocultar senha' : 'Mostrar senha');
+  });
+
+  function validEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+
+  function clearErrors() {
+    emailMsg.textContent = '';
+    passwordMsg.textContent = '';
+    status.className = 'status';
+    status.textContent = '';
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    clearErrors();
+
+    let ok = true;
+    const emailVal = emailInput.value.trim();
+    const pwVal = passwordInput.value;
+
+    if (!emailVal) {
+      emailMsg.textContent = 'Informe seu e-mail.';
+      ok = false;
+    } else if (!validEmail(emailVal)) {
+      emailMsg.textContent = 'Informe um e-mail válido.';
+      ok = false;
+    }
+
+    if (!pwVal) {
+      passwordMsg.textContent = 'Informe sua senha.';
+      ok = false;
+    } else if (pwVal.length < 6) {
+      passwordMsg.textContent = 'A senha deve ter ao menos 6 caracteres.';
+      ok = false;
+    }
+
+    if (!ok) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Entrando…';
+
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Entrar';
+      status.className = 'status show success';
+      status.textContent = 'Login validado no front-end. Conecte este formulário à sua API de autenticação para concluir o acesso.';
+    }, 700);
+  });
+
+  document.getElementById('forgotLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    status.className = 'status show';
+    status.style.color = '#8C87A0';
+    status.style.borderColor = '#E5E0F5';
+    status.style.background = 'transparent';
+    status.textContent = 'Ligue este link ao seu fluxo de recuperação de senha.';
+  });
+
+  document.getElementById('signupLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    status.className = 'status show';
+    status.style.color = '#8C87A0';
+    status.style.borderColor = '#E5E0F5';
+    status.style.background = 'transparent';
+    status.textContent = 'Ligue este link à sua página de cadastro.';
+  });
+</script>
+</body>
+</html>
