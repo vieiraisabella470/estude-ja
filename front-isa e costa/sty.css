@@ -1250,3 +1250,213 @@ body.pagina-auth {
         padding: 28px 22px;
     }
 }
+
+
+
+/*PAGINA INICIAL */
+
+.mensagem a {
+    color: #6724c7;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.mensagem a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* ===========================================================
+   PÁGINA INICIAL PÚBLICA (Sobre Nós / Landing Page)
+   Esta página não usa o menu lateral do sistema, por isso
+   sobrescrevemos o "display: flex" padrão do body.
+   =========================================================== */
+
+body.pagina-publica {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    min-height: 100vh;
+    width: 100%;
+
+    background-color: #ffffff;
+}
+
+/* Barra do topo da página pública (logo + botões de entrar/cadastrar) */
+.topo-publico {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    padding: 18px 40px;
+
+    background-color: #5720b7;
+    color: white;
+}
+
+.logo-publico {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.logo-publico .destaque {
+    color: #42a88d;
+}
+
+.acoes-publicas {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Área central da página pública */
+.conteudo-publico {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 50px 25px;
+}
+
+/* SEÇÃO HERO (título grande + ilustração) */
+.hero-publico {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+
+    margin-bottom: 60px;
+}
+
+.hero-texto {
+    flex: 1;
+    min-width: 280px;
+}
+
+.hero-texto h1 {
+    color: #392075;
+    font-size: 40px;
+    margin-bottom: 14px;
+}
+
+.hero-texto h1 span {
+    color: #42a88d;
+}
+
+.hero-subtitulo {
+    color: #555;
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 480px;
+    margin-bottom: 28px;
+}
+
+.hero-botoes {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.hero-ilustracao {
+    flex: 1;
+    min-width: 260px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.hero-ilustracao svg {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+}
+
+/* Faixa de números/destaques rápidos */
+.destaques-publicos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    margin-bottom: 60px;
+}
+
+.destaque-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    min-width: 190px;
+    padding: 18px 22px;
+
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.destaque-item span {
+    font-size: 30px;
+}
+
+.destaque-item strong {
+    display: block;
+    font-size: 20px;
+    color: #392075;
+}
+
+.destaque-item p {
+    font-size: 13px;
+    color: #777;
+}
+
+.titulo-publico-secao {
+    text-align: center;
+    color: #392075;
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
+/* Rodapé da página pública */
+.rodape-publico {
+    text-align: center;
+    padding: 24px;
+    margin-top: 30px;
+
+    background-color: #f7f5fb;
+    color: #999;
+    font-size: 13px;
+}
+
+@media (max-width: 700px) {
+    .topo-publico {
+        padding: 14px 20px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hero-texto h1 {
+        font-size: 30px;
+    }
+
+    .hero-texto {
+        text-align: center;
+    }
+
+    .hero-subtitulo {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-botoes {
+        justify-content: center;
+    }
+}

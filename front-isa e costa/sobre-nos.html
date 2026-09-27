@@ -1,156 +1,184 @@
-<!DOCTYPE html>
+><!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Sobre Nós - Estuda Já</title>
+    <title>Estuda Já - Aprenda, Pratique e Evolua</title>
 
     <link rel="stylesheet" href="sty.css">
 </head>
 
-<body>
-<aside class="menu">
+<body class="pagina-publica">
 
-        <div class="logo-menu">
+    <header class="topo-publico">
+
+        <div class="logo-publico">
             <span>📚</span>
-            <h2>Estude Já</h2>
+            <span>Estuda <span class="destaque">Já</span></span>
         </div>
 
-        <a href="sobre-nos.html" class="ativo">📖 Sobre Nós</a>
-        <a href="video-aulas.html">▶️ Vídeo Aulas</a>
-        <a href="atividades.html">📝 Atividades</a>
-        <a href="meu-progresso.html">📊 Meu Progresso</a>
-        <a href="materias.html">📚 Matérias</a>
-        <a href="quizzes.html">❓ Quizzes</a>
-        <a href="nivel-aprendizagem.html">⭐ Nível de Aprendizagem</a>
-
-    </aside>
-
-
-
-    <main class="principal">
-
-        <header class="topo">
-
-            <input
-                type="text"
-                placeholder="Pesquisar...">
-
-            <button class="botao-pesquisa">🔍</button>
-
+        <nav class="acoes-publicas">
             <a href="login.html" class="botao-login">👤 Entrar</a>
+            <a href="cadastro.html" class="botao verde">Criar conta</a>
+        </nav>
 
-        </header>
+    </header>
 
 
-        <section class="conteudo">
+    <main class="conteudo-publico">
 
-            <div class="titulo">
+        <!-- HERO: título grande, texto de apresentação e ilustração -->
+        <section class="hero-publico">
 
+            <div class="hero-texto">
                 <h1>📚 ESTUDA <span>JÁ</span></h1>
 
-                <p>Aprenda, Pratique e Evolua!</p>
+                <p class="hero-subtitulo">
+                    A forma mais divertida de aprender: vídeo aulas, atividades,
+                    quizzes e um acompanhamento completo da sua evolução, tudo
+                    em um só lugar.
+                </p>
 
+                <div class="hero-botoes">
+                    <a href="cadastro.html" class="botao verde">Comece agora — é grátis</a>
+                    <a href="login.html" class="botao">Já tenho conta</a>
+                </div>
             </div>
 
+            <div class="hero-ilustracao">
+                <svg viewBox="0 0 300 260" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="150" cy="235" rx="110" ry="12" fill="#F4F1FA"/>
 
-            <div class="containers">
+                    <!-- livro aberto -->
+                    <path d="M60 150 L150 130 L240 150 L240 190 L150 172 L60 190 Z" fill="#5720b7"/>
+                    <path d="M150 130 L150 172 L240 190 L240 150 Z" fill="#6d36ca"/>
+                    <path d="M70 155 L145 138" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+                    <path d="M70 168 L140 152" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+                    <path d="M160 138 L232 155" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+                    <path d="M162 152 L230 168" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
 
-                <div class="container">
+                    <!-- chapéu de formatura -->
+                    <path d="M150 95 L205 118 L150 141 L95 118 Z" fill="#392075"/>
+                    <path d="M150 141 L150 158" stroke="#392075" stroke-width="3"/>
+                    <circle cx="150" cy="160" r="4" fill="#F5A623"/>
+                    <rect x="130" y="118" width="40" height="18" rx="3" fill="#42a88d"/>
 
-                    <div class="cabecalho-container">
-                        Nossa Missão
-                    </div>
-
-                    <div class="corpo-container">
-                        <h3>Explore novos materiais</h3>
-
-                        <p>
-                            Descubra conteúdos para você!
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="container">
-
-                    <div class="cabecalho-container">
-                        Nossas Aulas
-                    </div>
-
-                    <div class="corpo-container">
-                        <h3>Assista vídeoaulas</h3>
-
-                        <p>
-                            Aprenda com nossos professores!
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="container">
-
-                    <div class="cabecalho-container">
-                        Nosso Método
-                    </div>
-
-                    <div class="corpo-container">
-                        <h3>Organize seu cronograma</h3>
-                        <p>
-                            Planeje seus estudos!
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="container">
-
-                    <div class="cabecalho-container roxo">
-                        Nosso Compromisso
-                    </div>
-
-                    <div class="corpo-container">
-                        <h3>Organize seu cronograma</h3>
-                        <p>
-                            Planeje seus estudos!
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="mensagem">
-
-                <span>🚀</span>
-
-                <div>
-                    <h2>Dê o seu melhor todos os dias!</h2>
-
-                    <p>
-                        Você é capaz de conquistar seus sonhos!
-                    </p>
-                </div>
-
+                    <!-- estrelas decorativas -->
+                    <path d="M245 90 l4 9 10 1-7.5 7 2 10-8.5-5.5-8.5 5.5 2-10-7.5-7 10-1z" fill="#F5A623"/>
+                    <path d="M55 100 l3 6 7 1-5 5 1.5 7-6.5-4-6.5 4 1.5-7-5-5 7-1z" fill="#42a88d"/>
+                    <circle cx="240" cy="200" r="6" fill="#42a88d" opacity="0.6"/>
+                    <circle cx="45" cy="60" r="5" fill="#5720b7" opacity="0.5"/>
+                </svg>
             </div>
 
         </section>
 
+
+        <!-- FAIXA DE NÚMEROS/DESTAQUES -->
+        <section class="destaques-publicos">
+
+            <div class="destaque-item">
+                <span>📝</span>
+                <div>
+                    <strong>+30</strong>
+                    <p>Atividades práticas</p>
+                </div>
+            </div>
+
+            <div class="destaque-item">
+                <span>▶️</span>
+                <div>
+                    <strong>+20</strong>
+                    <p>Vídeo aulas</p>
+                </div>
+            </div>
+
+            <div class="destaque-item">
+                <span>❓</span>
+                <div>
+                    <strong>+15</strong>
+                    <p>Quizzes divertidos</p>
+                </div>
+            </div>
+
+            <div class="destaque-item">
+                <span>⭐</span>
+                <div>
+                    <strong>6</strong>
+                    <p>Níveis de aprendizagem</p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- O QUE O SITE OFERECE -->
+        <h2 class="titulo-publico-secao">Tudo o que você precisa para estudar melhor</h2>
+
+        <div class="containers">
+
+            <div class="container">
+                <div class="cabecalho-container">
+                    📖 Nossa Missão
+                </div>
+                <div class="corpo-container">
+                    <h3>Explore novos materiais</h3>
+                    <p>Descubra conteúdos pensados para o seu jeito de aprender.</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="cabecalho-container roxo">
+                    ▶️ Nossas Aulas
+                </div>
+                <div class="corpo-container">
+                    <h3>Assista vídeo aulas</h3>
+                    <p>Aprenda no seu ritmo com nossos professores.</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="cabecalho-container">
+                    📊 Nosso Método
+                </div>
+                <div class="corpo-container">
+                    <h3>Organize seu cronograma</h3>
+                    <p>Acompanhe seu progresso e planeje seus estudos.</p>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="cabecalho-container roxo">
+                    ⭐ Nosso Compromisso
+                </div>
+                <div class="corpo-container">
+                    <h3>Aprendizagem com evolução</h3>
+                    <p>Suba de nível e desbloqueie conquistas estudando.</p>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- CHAMADA FINAL PARA CADASTRO -->
+        <div class="mensagem">
+            <span>🚀</span>
+
+            <div>
+                <h2>Dê o seu melhor todos os dias!</h2>
+                <p>Você é capaz de conquistar seus sonhos. <a href="cadastro.html">Crie sua conta gratuita</a> e comece agora.</p>
+            </div>
+        </div>
+
     </main>
 
 
-</body>
+    <footer class="rodape-publico">
+        <p>📚 Estuda Já — Aprenda, Pratique e Evolua.</p>
+    </footer>
 
-<script>
-    function alternarMenu() {
-        document.getElementById("itensMenu").classList.toggle("escondido");
-    }
-</script>
+</body>
 
 </html>
