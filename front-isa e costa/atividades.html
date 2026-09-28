@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -8,7 +8,7 @@
     <title>Atividades - Estuda Já</title>
 
     <link rel="stylesheet" href="sty.css">
-</head> 
+</head>
 
 
 <body>
@@ -49,6 +49,9 @@
 
         <section class="conteudo">
 
+            <!-- ========== TELA 1: LISTA DE ATIVIDADES ========== -->
+            <div id="telaLista">
+
             <div class="cabecalho-pagina">
                 <h1>Atividades</h1>
                 <p>Resolva seus exercícios</p>
@@ -83,7 +86,7 @@
                         </div>
                     </div>
 
-                    <a href="#" class="botao">Resolver</a>
+                    <a href="#" class="botao" id="btnResolverAlgebra">Resolver</a>
                 </div>
 
 
@@ -122,9 +125,310 @@
 
             </div>
 
+            </div>
+            <!-- ========== FIM DA TELA 1 ========== -->
+
+
+            <!-- ========== TELA 2: QUESTÕES DA ATIVIDADE ========== -->
+            <div id="telaQuestoes" class="oculto">
+
+                <div class="ativ-cabecalho">
+                    <div class="ativ-icone">📋</div>
+                    <div>
+                        <h2>Atividade: Álgebra I</h2>
+                        <p>Questões do ENEM – Funções e Expressões Algébricas</p>
+                        <p class="meta">📖 8 questões</p>
+                    </div>
+                </div>
+
+                <div class="ativ-progresso">
+                    <div class="ativ-barra-fundo">
+                        <div class="ativ-barra-verde" id="barraVerde"></div>
+                    </div>
+                    <span class="ativ-contador" id="contador">1 / 8</span>
+                </div>
+
+                <div class="ativ-questao">
+                    <div class="ativ-topo-questao">
+                        <span class="ativ-selo" id="seloQuestao">Questão 1</span>
+                        <span class="ativ-fonte" id="fonteQuestao"></span>
+                    </div>
+
+                    <p class="ativ-enunciado" id="enunciado"></p>
+                    <img class="ativ-imagem oculto" id="imagemQuestao" alt="Imagem da questão">
+                    <p class="ativ-pergunta" id="pergunta"></p>
+
+                    <div id="alternativas"></div>
+                </div>
+
+                <div class="ativ-rodape">
+                    <button class="ativ-btn-anterior" id="btnAnterior">‹ Anterior</button>
+                    <button class="ativ-btn-proxima" id="btnProxima">Próxima ›</button>
+                </div>
+
+            </div>
+
+
+            <!-- ========== TELA 3: RESULTADO ========== -->
+            <div id="telaResultado" class="oculto">
+
+                <div class="res-topo">
+                    <div class="ativ-icone">✅</div>
+
+                    <div class="res-titulo">
+                        <h2>Resultado da Atividade</h2>
+                        <p>Você terminou as 8 questões!</p>
+                    </div>
+
+                    <div class="res-numero">
+                        <span>Acertos</span>
+                        <strong id="resAcertos">0 / 8</strong>
+                    </div>
+
+                    <div class="res-numero">
+                        <span>Porcentagem</span>
+                        <strong id="resPorcentagem">0%</strong>
+                    </div>
+                </div>
+
+                <div class="res-lista" id="resLista"></div>
+
+                <div class="res-botoes">
+                    <button class="botao verde" id="btnRefazer">Refazer atividade</button>
+                    <button class="botao" id="btnVoltar">Voltar às atividades</button>
+                </div>
+
+            </div>
+
         </section>
 
     </main>
+
+
+    <script>
+        // ---------- DADOS DA ATIVIDADE ----------
+        // Para as questões 3, 4 e 6 (que dependem de gráfico), coloque o caminho
+        // da imagem em "imagem", por exemplo: "img/questao3.png"
+        const questoes = [
+            {
+                fonte: "ENEM 2018 – Questão 147",
+                enunciado: "Uma empresa possui um contrato de empréstimo dividido em 60 parcelas mensais de R$ 820,00. O cliente deseja antecipar algumas parcelas e precisa determinar qual parcela poderá ser antecipada junto com a 30ª parcela, considerando a taxa de juros estabelecida no contrato.",
+                pergunta: "",
+                imagem: "",
+                alternativas: ["56ª parcela", "55ª parcela", "52ª parcela", "51ª parcela", "45ª parcela"]
+            },
+            {
+                fonte: "ENEM 2019 – Questão 168",
+                enunciado: "Uma empresa possui um gerente que recebe R$ 1.000,00 por semana. Além dele, trabalham na empresa funcionários diaristas, que trabalham dois dias por semana e recebem R$ 80,00 por dia.",
+                pergunta: "Considerando X como a quantidade total de funcionários e Y como o valor gasto semanalmente pela empresa com esses funcionários, qual expressão representa essa situação?",
+                imagem: "",
+                alternativas: ["Y = 80X + 920", "Y = 80X + 1 000", "Y = 80X + 1 080", "Y = 160X + 840", "Y = 160X + 1 000"]
+            },
+            {
+                fonte: "ENEM 2020 – Questão 175",
+                enunciado: "Uma empresa analisa sua situação financeira comparando a receita obtida com a venda de seus produtos e o custo de produção. O lucro da empresa é determinado pela diferença entre a receita e o custo.",
+                pergunta: "A partir dos gráficos apresentados, qual gráfico representa corretamente o lucro em função da quantidade produzida?",
+                imagem: "",
+                alternativas: ["Gráfico A", "Gráfico B", "Gráfico C", "Gráfico D", "Gráfico E"]
+            },
+            {
+                fonte: "ENEM 2021 – Questão 156",
+                enunciado: "Uma massa presa a uma mola realiza um movimento periódico. A posição da massa em relação ao tempo pode ser representada por uma função trigonométrica.",
+                pergunta: "Considerando o gráfico apresentado, qual expressão representa esse movimento?",
+                imagem: "",
+                alternativas: ["−3 cos(2t)", "−3 sen(2t)", "3 cos(2t)", "−6 cos(2t)", "6 sen(2t)"]
+            },
+            {
+                fonte: "ENEM 2022 – Questão 158",
+                enunciado: "Uma situação relacionada à quantidade de pessoas infectadas é representada por uma função quadrática: p(t) = −t² + 10t + 24",
+                pergunta: "A partir dessa função, em qual período ocorre o momento em que a quantidade de pessoas infectadas atinge seu maior valor?",
+                imagem: "",
+                alternativas: ["I", "II", "III", "IV", "V"]
+            },
+            {
+                fonte: "ENEM 2022 – Questão 162",
+                enunciado: "Uma loja estabeleceu uma meta de vendas de R$ 77.000,00 em determinado período. O gráfico apresenta a evolução das vendas de diferentes setores da loja.",
+                pergunta: "Considerando a variação apresentada no gráfico, qual valor ainda falta para que a loja alcance sua meta?",
+                imagem: "",
+                alternativas: ["R$ 5.000,00", "R$ 7.000,00", "R$ 11.000,00", "R$ 18.000,00", "R$ 29.000,00"]
+            },
+            {
+                fonte: "ENEM 2023 – Questão 161",
+                enunciado: "Uma loja oferece um produto para pagamento à vista ou financiado em três parcelas. No financiamento, o preço do produto sofre um acréscimo e é dividido em três parcelas iguais.",
+                pergunta: "Considerando o sistema de juros compostos, qual é a taxa mensal de juros utilizada no financiamento?",
+                imagem: "",
+                alternativas: ["6,7%", "10%", "20%", "21,5%", "23,3%"]
+            },
+            {
+                fonte: "ENEM 2024 – Questão 143",
+                enunciado: "A escala Richter é utilizada para medir a magnitude de terremotos. A relação entre a magnitude de um terremoto e a energia liberada pode ser representada por uma expressão logarítmica.",
+                pergunta: "Considerando os dados apresentados, qual é a magnitude do segundo terremoto?",
+                imagem: "",
+                alternativas: ["5,4", "6,2", "7,6", "8,2", "8,4"]
+            }
+        ];
+
+        // Gabarito: NÃO aparece em nenhum lugar da tela, só é usado para corrigir.
+        const gabarito = ["C", "D", "A", "A", "C", "C", "D", "C"];
+        const letras = ["A", "B", "C", "D", "E"];
+
+        let atual = 0;
+        let respostas = [];
+
+        // ---------- ELEMENTOS DA PÁGINA ----------
+        const telaLista = document.getElementById("telaLista");
+        const telaQuestoes = document.getElementById("telaQuestoes");
+        const telaResultado = document.getElementById("telaResultado");
+
+        const barraVerde = document.getElementById("barraVerde");
+        const contador = document.getElementById("contador");
+        const seloQuestao = document.getElementById("seloQuestao");
+        const fonteQuestao = document.getElementById("fonteQuestao");
+        const enunciado = document.getElementById("enunciado");
+        const pergunta = document.getElementById("pergunta");
+        const imagemQuestao = document.getElementById("imagemQuestao");
+        const alternativas = document.getElementById("alternativas");
+        const btnAnterior = document.getElementById("btnAnterior");
+        const btnProxima = document.getElementById("btnProxima");
+
+        // ---------- FUNÇÕES ----------
+        function mostrarTela(tela) {
+            telaLista.classList.add("oculto");
+            telaQuestoes.classList.add("oculto");
+            telaResultado.classList.add("oculto");
+            tela.classList.remove("oculto");
+            window.scrollTo(0, 0);
+        }
+
+        function iniciarAtividade() {
+            atual = 0;
+            respostas = new Array(questoes.length).fill(null);
+            mostrarTela(telaQuestoes);
+            mostrarQuestao();
+        }
+
+        function mostrarQuestao() {
+            const q = questoes[atual];
+
+            seloQuestao.textContent = "Questão " + (atual + 1);
+            fonteQuestao.textContent = q.fonte;
+            enunciado.textContent = q.enunciado;
+            pergunta.textContent = q.pergunta;
+
+            if (q.imagem) {
+                imagemQuestao.src = q.imagem;
+                imagemQuestao.classList.remove("oculto");
+            } else {
+                imagemQuestao.classList.add("oculto");
+            }
+
+            // barra verde e contador acompanham a questão atual
+            barraVerde.style.width = ((atual + 1) / questoes.length * 100) + "%";
+            contador.textContent = (atual + 1) + " / " + questoes.length;
+
+            // alternativas
+            alternativas.innerHTML = "";
+            q.alternativas.forEach(function (texto, i) {
+                const botao = document.createElement("button");
+                botao.className = "ativ-alternativa";
+                if (respostas[atual] === letras[i]) {
+                    botao.classList.add("escolhida");
+                }
+
+                const letra = document.createElement("span");
+                letra.className = "ativ-letra";
+                letra.textContent = letras[i];
+
+                const conteudo = document.createElement("span");
+                conteudo.textContent = texto;
+
+                botao.appendChild(letra);
+                botao.appendChild(conteudo);
+                botao.addEventListener("click", function () {
+                    escolher(letras[i], botao);
+                });
+                alternativas.appendChild(botao);
+            });
+
+            // botões de baixo
+            btnAnterior.disabled = (atual === 0);
+            btnProxima.textContent = (atual === questoes.length - 1) ? "Finalizar ✓" : "Próxima ›";
+        }
+
+        function escolher(letra, botaoClicado) {
+            respostas[atual] = letra;
+
+            document.querySelectorAll(".ativ-alternativa").forEach(function (b) {
+                b.classList.remove("escolhida");
+            });
+
+            // força o navegador a "reiniciar" a animação
+            void botaoClicado.offsetWidth;
+            botaoClicado.classList.add("escolhida");
+        }
+
+        function proxima() {
+            if (atual < questoes.length - 1) {
+                atual++;
+                mostrarQuestao();
+            } else {
+                finalizar();
+            }
+        }
+
+        function anterior() {
+            if (atual > 0) {
+                atual--;
+                mostrarQuestao();
+            }
+        }
+
+        function finalizar() {
+            const semResposta = respostas.filter(function (r) { return r === null; }).length;
+            if (semResposta > 0) {
+                const continuar = confirm("Você ainda tem " + semResposta + " questão(ões) sem resposta. Deseja finalizar mesmo assim?");
+                if (!continuar) return;
+            }
+            mostrarResultado();
+        }
+
+        function mostrarResultado() {
+            const lista = document.getElementById("resLista");
+            lista.innerHTML = "";
+            let acertos = 0;
+
+            respostas.forEach(function (resposta, i) {
+                const correta = (resposta === gabarito[i]);
+                if (correta) acertos++;
+
+                const item = document.createElement("div");
+                item.className = "res-item";
+                item.innerHTML =
+                    '<span class="num">' + (i + 1) + '</span>' +
+                    '<span class="nome">Questão ' + (i + 1) + '</span>' +
+                    '<span class="res-status ' + (correta ? "correta" : "incorreta") + '">' +
+                    (correta ? "✔ Correta" : "✖ Incorreta") + '</span>';
+                lista.appendChild(item);
+            });
+
+            document.getElementById("resAcertos").textContent = acertos + " / " + questoes.length;
+            document.getElementById("resPorcentagem").textContent = Math.round(acertos / questoes.length * 100) + "%";
+
+            mostrarTela(telaResultado);
+        }
+
+        // ---------- LIGAÇÃO DOS BOTÕES ----------
+        document.getElementById("btnResolverAlgebra").addEventListener("click", function (e) {
+            e.preventDefault();
+            iniciarAtividade();
+        });
+        btnProxima.addEventListener("click", proxima);
+        btnAnterior.addEventListener("click", anterior);
+        document.getElementById("btnRefazer").addEventListener("click", iniciarAtividade);
+        document.getElementById("btnVoltar").addEventListener("click", function () {
+            mostrarTela(telaLista);
+        });
+    </script>
 
 </body>
 
