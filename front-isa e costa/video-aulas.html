@@ -8,6 +8,67 @@
     <title>Vídeo Aulas - Estuda Já</title>
 
     <link rel="stylesheet" href="sty.css">
+
+    <style>
+        /* ===== Player de vídeo em modal ===== */
+        .video-card[data-video] {
+            cursor: pointer;
+        }
+ 
+        .modal-video {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+ 
+        .modal-video.aberto {
+            display: flex;
+        }
+ 
+        .modal-conteudo {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+        }
+ 
+        .modal-conteudo h2 {
+            margin: 0 40px 15px 0;
+        }
+ 
+        .modal-fechar {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            border: none;
+            background: transparent;
+            font-size: 20px;
+            cursor: pointer;
+        }
+ 
+        /* Mantém a proporção 16:9 */
+        .player {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+        }
+ 
+        .player iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+    </style>
+    
 </head>
 
 <body>
@@ -70,16 +131,16 @@
 
             <div class="video-grid">
 
-                <div class="video-card">
-                    <div class="video-thumb">
-                        ▶️
-                        <span class="duracao">12:30</span>
-                    </div>
+                <div class="video-card" data-video="i7MZpiRht2E" data-titulo="Introdução à álgebra">
+    <div class="video-thumb">
+        ▶️
+        <span class="duracao">13:03</span>
+    </div>
 
-                    <div class="video-info">
-                        <h3>Introdução à álgebra</h3>
-                        <p class="professor">Prof. João Silva</p>
-                        <p class="tempo">🕒 12:30</p>
+    <div class="video-info">
+        <h3>Introdução à álgebra</h3>
+                        <p class="professor">Gis com Giz</p>
+                        <p class="tempo">🕒 13:03</p>
                     </div>
                 </div>
 
@@ -116,6 +177,57 @@
         </section>
 
     </main>
+
+  <div class="modal-video" id="modalVideo">
+        <div class="modal-conteudo">
+            <button class="modal-fechar" id="fecharModal">✖</button>
+            <h2 id="modalTitulo"></h2>
+            <div class="player">
+                <iframe
+                    id="playerVideo"
+                    src=""
+                    title="Vídeo aula"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+ 
+    <script>
+        const modal = document.getElementById('modalVideo');
+        const player = document.getElementById('playerVideo');
+        const titulo = document.getElementById('modalTitulo');
+ 
+        // Abre o vídeo ao clicar em qualquer card que tenha data-video
+        document.querySelectorAll('.video-card[data-video]').forEach(card => {
+            card.addEventListener('click', () => {
+                const id = card.dataset.video;
+                titulo.textContent = card.dataset.titulo;
+                player.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+                modal.classList.add('aberto');
+            });
+        });
+ 
+        function fecharModal() {
+            modal.classList.remove('aberto');
+            player.src = ''; // para o vídeo ao fechar
+        }
+ 
+        document.getElementById('fecharModal').addEventListener('click', fecharModal);
+ 
+        // Fecha clicando fora do vídeo
+        modal.addEventListener('click', e => {
+            if (e.target === modal) fecharModal();
+        });
+ 
+        // Fecha com a tecla ESC
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') fecharModal();
+        });
+    </script>
+
 
 </body>
 

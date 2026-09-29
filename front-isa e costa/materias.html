@@ -8,11 +8,99 @@
     <title>Matérias - Estuda Já</title>
 
     <link rel="stylesheet" href="sty.css">
+
+    <style>
+        /* ===== Estilos novos, só desta página (o resto vem do sty.css) ===== */
+
+        /* Esconde as telas que não estão sendo usadas */
+        .tela {
+            display: none;
+        }
+
+        .tela.aberta {
+            display: block;
+        }
+
+        /* Botão "Voltar" (usa o visual do .link-voltar do sty.css) */
+        .botao-voltar {
+            border: none;
+            background: none;
+            cursor: pointer;
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+
+        /* Tema ainda sem conteúdo */
+        .item-lista.em-breve {
+            opacity: 0.6;
+        }
+
+        .botao.desativado {
+            background-color: #bbb;
+            cursor: not-allowed;
+        }
+
+        /* Texto do conteúdo */
+        .texto-conteudo {
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+            padding: 30px;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        /* Esconde o texto que não está sendo lido */
+        .texto-conteudo.oculto {
+            display: none;
+        }
+
+        .texto-conteudo h2 {
+            color: #392075;
+            margin: 30px 0 10px;
+        }
+
+        .texto-conteudo h2:first-child {
+            margin-top: 0;
+        }
+
+        .texto-conteudo h3 {
+            color: #42a88d;
+            margin: 20px 0 8px;
+        }
+
+        .texto-conteudo p {
+            margin-bottom: 10px;
+        }
+
+        .texto-conteudo ul {
+            margin: 0 0 12px 25px;
+        }
+
+        /* Fórmulas e exemplos em destaque */
+        .formula {
+            background-color: #F4F1FA;
+            border-left: 4px solid #6724c7;
+            border-radius: 6px;
+            padding: 10px 15px;
+            margin: 8px 0 14px;
+            font-family: "Courier New", monospace;
+        }
+
+        .atencao {
+            background-color: #FFF6E5;
+            border-left: 4px solid #F5A623;
+            border-radius: 6px;
+            padding: 10px 15px;
+            margin: 12px 0;
+        }
+    </style>
 </head>
 
 <body>
 
-   <aside class="menu">
+    <aside class="menu">
 
         <div class="logo-menu">
             <span>📚</span>
@@ -30,114 +118,460 @@
     </aside>
 
 
-
     <main class="principal">
 
         <header class="topo">
-
-            <input
-                type="text"
-                placeholder="Pesquisar matéria...">
-
+            <input type="text" placeholder="Pesquisar matéria...">
             <button class="botao-pesquisa">🔍</button>
-
             <a href="login.html" class="botao-login">👤 Entrar</a>
-
         </header>
-
 
         <section class="conteudo">
 
-            <div class="cabecalho-pagina">
-                <h1>Matérias</h1>
-                <p>Escolha uma matéria para começar seus estudos!</p>
-            </div>
+            <!-- ============ TELA 1: lista de matérias ============ -->
+            <div class="tela aberta" id="telaMaterias">
 
+                <div class="cabecalho-pagina">
+                    <h1>Matérias</h1>
+                    <p>Escolha uma matéria para começar seus estudos!</p>
+                </div>
 
-            <div class="containers">
+                <div class="containers">
 
-                <!-- Matéria em andamento: recebe a classe "selecionada" para o destaque -->
-                <div class="container selecionada">
-
-                    <div class="cabecalho-container">
-                        Matemática
+                    <div class="container selecionada">
+                        <div class="cabecalho-container">Matemática</div>
+                        <div class="corpo-container">
+                            <p>Aprenda álgebra, geometria, funções e muito mais.</p>
+                            <a href="#" class="botao verde" data-materia="matematica">Entrar</a>
+                        </div>
                     </div>
 
-                    <div class="corpo-container">
-                        <p>
-                            Aprenda álgebra, geometria, funções e muito mais.
-                        </p>
+                    <div class="container">
+                        <div class="cabecalho-container roxo">Português</div>
+                        <div class="corpo-container">
+                            <p>Estude gramática, interpretação de texto e redação.</p>
+                            <a href="#" class="botao" data-materia="portugues">Entrar</a>
+                        </div>
+                    </div>
 
-                        <a href="#" class="botao verde">Entrar</a>
+                    <div class="container">
+                        <div class="cabecalho-container">História</div>
+                        <div class="corpo-container">
+                            <p>Explore acontecimentos históricos do Brasil e do mundo.</p>
+                            <a href="#" class="botao verde" data-materia="historia">Entrar</a>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="cabecalho-container roxo">Biologia</div>
+                        <div class="corpo-container">
+                            <p>Aprenda genética, corpo humano e ecologia.</p>
+                            <a href="#" class="botao" data-materia="biologia">Entrar</a>
+                        </div>
                     </div>
 
                 </div>
 
-
-                <div class="container">
-
-                    <div class="cabecalho-container roxo">
-                        Português
+                <div class="mensagem">
+                    <span>📖</span>
+                    <div>
+                        <h2>Continue evoluindo todos os dias!</h2>
                     </div>
-
-                    <div class="corpo-container">
-                        <p>
-                            Estude gramática, interpretação de texto e redação.
-                        </p>
-
-                        <a href="#" class="botao">Entrar</a>
-                    </div>
-
-                </div>
-
-
-                <div class="container">
-
-                    <div class="cabecalho-container">
-                        História
-                    </div>
-
-                    <div class="corpo-container">
-                        <p>
-                            Explore acontecimentos históricos do Brasil e do mundo.
-                        </p>
-
-                        <a href="#" class="botao verde">Entrar</a>
-                    </div>
-
-                </div>
-
-
-                <div class="container">
-
-                    <div class="cabecalho-container roxo">
-                        Biologia
-                    </div>
-
-                    <div class="corpo-container">
-                        <p>
-                            Aprenda genética, corpo humano e ecologia.
-                        </p>
-
-                        <a href="#" class="botao">Entrar</a>
-                    </div>
-
                 </div>
 
             </div>
 
 
-            <div class="mensagem">
-                <span>📖</span>
+            <!-- ============ TELA 2: lista de temas da matéria ============ -->
+            <div class="tela" id="telaTemas">
 
-                <div>
-                    <h2>Continue evoluindo todos os dias!</h2>
+                <button class="link-voltar botao-voltar" id="voltarMaterias">← Voltar para as matérias</button>
+
+                <div class="cabecalho-pagina">
+                    <h1 id="tituloMateria"></h1>
+                    <p>Escolha um conteúdo para estudar.</p>
                 </div>
+
+                <div class="lista-itens" id="listaTemas"></div>
+
+            </div>
+
+
+            <!-- ============ TELA 3: conteúdo em texto ============ -->
+            <div class="tela" id="telaConteudo">
+
+                <button class="link-voltar botao-voltar" id="voltarTemas">← Voltar para os conteúdos</button>
+
+                <div class="cabecalho-pagina">
+                    <h1 id="tituloConteudo"></h1>
+                    <p id="subtituloConteudo"></p>
+                </div>
+
+                <!-- ===== Um bloco por conteúdo. O id precisa ser "conteudo-" + o id do tema ===== -->
+
+                <!-- Matemática > Álgebra I -->
+                <div class="texto-conteudo oculto" id="conteudo-algebra1">
+
+                    <p>Alguns pontos-chave dessa matéria para o ENEM que devem ser levados em conta ao estudarmos são:</p>
+                    <ul>
+                        <li><strong>Expressões algébricas:</strong> compreender como representar situações matemáticas utilizando números, letras e operações.</li>
+                        <li><strong>Produtos notáveis:</strong> reconhecer e desenvolver expressões como quadrado da soma, quadrado da diferença e produto da soma pela diferença.</li>
+                        <li><strong>Fatoração:</strong> aprender a transformar expressões algébricas em produtos de fatores, facilitando cálculos e simplificações.</li>
+                        <li><strong>Equações:</strong> resolver equações de 1º e 2º grau e interpretar seus resultados em situações-problema.</li>
+                        <li><strong>Sistemas de equações:</strong> resolver problemas que envolvem duas ou mais incógnitas por meio de diferentes métodos.</li>
+                        <li><strong>Inequações:</strong> compreender desigualdades e representar seus conjuntos de soluções.</li>
+                        <li><strong>Razão, proporção e porcentagem:</strong> utilizar relações algébricas para resolver problemas do cotidiano, como descontos, aumentos e comparações.</li>
+                        <li><strong>Funções:</strong> compreender a relação entre duas grandezas e interpretar tabelas, fórmulas e gráficos.</li>
+                    </ul>
+
+                    <h2>1. Álgebra</h2>
+                    <p>A álgebra é uma área da matemática que utiliza letras, números e símbolos para representar valores conhecidos ou desconhecidos e estabelecer relações entre eles.</p>
+                    <p>As letras utilizadas na álgebra são chamadas de variáveis ou incógnitas, dependendo da situação.</p>
+                    <p>Por exemplo:</p>
+                    <div class="formula">2x + 5</div>
+                    <p>Nesse caso, x representa um valor que pode variar. O número 2 é o coeficiente de x e 5 é um termo constante.</p>
+                    <p>A álgebra é muito utilizada no ENEM para representar situações do cotidiano, encontrar valores desconhecidos e estabelecer relações entre diferentes grandezas.</p>
+
+                    <h3>a) Expressões algébricas</h3>
+                    <p>Uma expressão algébrica é formada por números, letras e operações matemáticas.</p>
+                    <p>Exemplos:</p>
+                    <div class="formula">3x + 5<br>2x² - 4x + 7<br>5(a + b)</div>
+                    <p>Os elementos separados por sinais de soma ou subtração são chamados de termos.</p>
+                    <p>Exemplo: na expressão 4x + 7:</p>
+                    <ul>
+                        <li>4x → termo algébrico</li>
+                        <li>7 → termo constante</li>
+                        <li>4 → coeficiente</li>
+                        <li>x → variável</li>
+                    </ul>
+
+                    <h3>Valor numérico</h3>
+                    <p>Para encontrar o valor de uma expressão, substituímos a variável pelo valor fornecido.</p>
+                    <p>Exemplo: se x = 3, determine 2x + 5.</p>
+                    <p>Substituindo:</p>
+                    <div class="formula">2 · 3 + 5 = 6 + 5 = 11</div>
+                    <p>Portanto: 2x + 5 = 11</p>
+
+                    <h2>2. Operações com expressões algébricas</h2>
+                    <p>As expressões algébricas podem ser simplificadas utilizando as operações básicas.</p>
+
+                    <h3>Adição e subtração</h3>
+                    <p>Só podemos somar ou subtrair diretamente termos semelhantes, ou seja, termos que possuem a mesma parte literal.</p>
+                    <p>Exemplo:</p>
+                    <div class="formula">3x + 5x = 8x</div>
+                    <p>Já 3x + 5y não pode ser simplificado dessa mesma maneira, pois x e y são variáveis diferentes.</p>
+
+                    <h3>Multiplicação</h3>
+                    <p>Na multiplicação de termos algébricos, multiplicamos os coeficientes e utilizamos as propriedades das potências.</p>
+                    <p>Exemplo:</p>
+                    <div class="formula">3x · 2x = 6x²</div>
+
+                    <h3>Divisão</h3>
+                    <p>Na divisão, dividimos os coeficientes e aplicamos as propriedades das potências.</p>
+                    <p>Exemplo:</p>
+                    <div class="formula">6x² ÷ 2x = 3x</div>
+
+                    <h2>3. Produtos Notáveis</h2>
+                    <p>Produtos notáveis são multiplicações que aparecem frequentemente na álgebra e possuem fórmulas que facilitam sua resolução.</p>
+
+                    <h3>Quadrado da soma</h3>
+                    <div class="formula">(a + b)² = a² + 2ab + b²</div>
+                    <p>Exemplo: (x + 3)²</p>
+                    <p>Aplicando a fórmula:</p>
+                    <div class="formula">x² + 2 · x · 3 + 3²<br>x² + 6x + 9</div>
+
+                    <h3>Quadrado da diferença</h3>
+                    <div class="formula">(a - b)² = a² - 2ab + b²</div>
+                    <p>Exemplo: (x - 4)²</p>
+                    <p>Resultado:</p>
+                    <div class="formula">x² - 8x + 16</div>
+
+                    <h3>Produto da soma pela diferença</h3>
+                    <div class="formula">(a + b)(a - b) = a² - b²</div>
+                    <p>Exemplo: (x + 5)(x - 5)</p>
+                    <p>Resultado:</p>
+                    <div class="formula">x² - 25</div>
+                    <p>Essas fórmulas ajudam a simplificar expressões e também aparecem em questões que exigem reconhecimento de padrões.</p>
+
+                    <h2>4. Fatoração</h2>
+                    <p>Fatorar uma expressão significa transformá-la em uma multiplicação de fatores.</p>
+                    <p>A fatoração pode facilitar a resolução de equações e a simplificação de expressões.</p>
+
+                    <h3>Fator comum</h3>
+                    <p>Quando os termos possuem um fator em comum, podemos colocá-lo em evidência.</p>
+                    <p>Exemplo: 6x + 12. O fator comum é 6:</p>
+                    <div class="formula">6(x + 2)</div>
+
+                    <h3>Diferença de dois quadrados</h3>
+                    <p>Uma expressão na forma a² - b² pode ser fatorada como:</p>
+                    <div class="formula">(a + b)(a - b)</div>
+                    <p>Exemplo: x² - 16. Como 16 = 4², temos x² - 4². Logo:</p>
+                    <div class="formula">(x + 4)(x - 4)</div>
+
+                    <h2>5. Equação do 1º grau</h2>
+                    <p>Uma equação é uma igualdade que contém uma ou mais incógnitas.</p>
+                    <p>Uma equação do 1º grau pode ser representada, de forma geral, por:</p>
+                    <div class="formula">ax + b = 0 &nbsp;(com a ≠ 0)</div>
+                    <p>O objetivo é encontrar o valor de x que torna a igualdade verdadeira.</p>
+                    <p>Exemplo: 2x + 6 = 14</p>
+                    <p>Subtraindo 6 dos dois lados: 2x = 8</p>
+                    <p>Dividindo por 2: x = 4</p>
+                    <p>Portanto, a solução é x = 4.</p>
+
+                    <h3>No ENEM</h3>
+                    <p>As equações de 1º grau aparecem frequentemente em situações envolvendo:</p>
+                    <ul>
+                        <li>preços;</li>
+                        <li>idade;</li>
+                        <li>distância;</li>
+                        <li>velocidade;</li>
+                        <li>consumo;</li>
+                        <li>quantidade de produtos;</li>
+                        <li>salários;</li>
+                        <li>tarifas;</li>
+                        <li>problemas de proporcionalidade.</li>
+                    </ul>
+
+                    <h2>6. Equação do 2º grau</h2>
+                    <p>Uma equação do 2º grau possui a forma:</p>
+                    <div class="formula">ax² + bx + c = 0 &nbsp;(com a ≠ 0)</div>
+                    <p>Uma das formas de resolver esse tipo de equação é utilizando a fórmula de Bhaskara.</p>
+                    <p>Primeiro calculamos o discriminante:</p>
+                    <div class="formula">Δ = b² - 4ac</div>
+                    <p>Depois:</p>
+                    <div class="formula">x = (-b ± √Δ) / 2a</div>
+                    <p>Exemplo: considere x² - 5x + 6 = 0</p>
+                    <div class="formula">a = 1<br>b = -5<br>c = 6</div>
+                    <p>Calculando o discriminante:</p>
+                    <div class="formula">Δ = (-5)² - 4 · 1 · 6<br>Δ = 25 - 24<br>Δ = 1</div>
+                    <p>Então:</p>
+                    <div class="formula">x = (5 ± 1) / 2</div>
+                    <p>As soluções são:</p>
+                    <div class="formula">x₁ = 3<br>x₂ = 2</div>
+
+                    <h2>7. Sistemas de equações</h2>
+                    <p>Um sistema de equações é formado por duas ou mais equações que possuem incógnitas em comum.</p>
+                    <p>Exemplo:</p>
+                    <div class="formula">x + y = 10<br>x - y = 2</div>
+                    <p>Somando as duas equações: 2x = 12, logo x = 6.</p>
+                    <p>Substituindo: 6 + y = 10, então y = 4.</p>
+                    <p>Portanto: x = 6 e y = 4.</p>
+                    <p>Os principais métodos utilizados para resolver sistemas são:</p>
+                    <ul>
+                        <li>substituição;</li>
+                        <li>adição ou eliminação;</li>
+                        <li>comparação.</li>
+                    </ul>
+                    <p>No ENEM, os sistemas costumam aparecer associados a situações do cotidiano, como preços, quantidades, produção e distribuição.</p>
+
+                    <h2>8. Inequações</h2>
+                    <p>As inequações são semelhantes às equações, mas utilizam sinais de desigualdade.</p>
+                    <p>Os principais símbolos são:</p>
+                    <ul>
+                        <li>&gt; → maior que</li>
+                        <li>&lt; → menor que</li>
+                        <li>≥ → maior ou igual a</li>
+                        <li>≤ → menor ou igual a</li>
+                    </ul>
+                    <p>Exemplo: 2x + 4 &gt; 10</p>
+                    <p>Subtraindo 4: 2x &gt; 6</p>
+                    <p>Dividindo por 2: x &gt; 3</p>
+                    <p>Portanto, todos os valores maiores que 3 satisfazem a inequação.</p>
+                    <div class="atencao">
+                        <strong>⚠️ Atenção</strong><br>
+                        Quando multiplicamos ou dividimos uma inequação por um número negativo, o sinal da desigualdade deve ser invertido.<br>
+                        Exemplo: -2x &gt; 6. Dividindo por -2: x &lt; -3
+                    </div>
+
+                    <h2>9. Razão e proporção</h2>
+                    <p>A razão representa uma comparação entre duas grandezas.</p>
+                    <p>Pode ser escrita como a/b ou a : b.</p>
+                    <p>Exemplo: em uma sala existem 10 meninas e 5 meninos. A razão entre meninas e meninos é:</p>
+                    <div class="formula">10/5 = 2</div>
+                    <p>Ou seja, há 2 meninas para cada menino.</p>
+
+                    <h3>Proporção</h3>
+                    <p>Uma proporção é uma igualdade entre duas razões.</p>
+                    <p>Exemplo:</p>
+                    <div class="formula">2/4 = 3/6</div>
+                    <p>As duas razões possuem o mesmo valor.</p>
+                    <p>A propriedade fundamental das proporções é: se a/b = c/d, então:</p>
+                    <div class="formula">a · d = b · c</div>
+                    <p>Essa relação é muito utilizada na resolução de problemas de proporcionalidade.</p>
+
+                    <h2>10. Porcentagem</h2>
+                    <p>A porcentagem representa uma parte de um total dividido em 100 partes.</p>
+                    <div class="formula">1% = 1/100</div>
+                    <p>Exemplo:</p>
+                    <div class="formula">20% = 20/100 = 0,20</div>
+                    <p>Para calcular 20% de 150:</p>
+                    <div class="formula">150 · 0,20 = 30</div>
+                    <p>Portanto: 20% de 150 = 30.</p>
+
+                    <h3>Aumentos e descontos</h3>
+                    <p>Um aumento de 10% significa multiplicar o valor por 1,10.</p>
+                    <p>Um desconto de 10% significa multiplicar o valor por 0,90.</p>
+                    <p>Exemplo: um produto custa R$ 200 e recebe desconto de 15%.</p>
+                    <div class="formula">200 · 0,85 = 170</div>
+                    <p>Preço final: R$ 170</p>
+
+                    <h2>11. Funções</h2>
+                    <p>Uma função estabelece uma relação entre duas grandezas, geralmente representadas por x e y.</p>
+                    <p>Podemos representar uma função por:</p>
+                    <div class="formula">y = f(x)</div>
+                    <p>Uma das funções mais importantes é a função afim:</p>
+                    <div class="formula">f(x) = ax + b</div>
+                    <p>onde:</p>
+                    <ul>
+                        <li>a → coeficiente angular;</li>
+                        <li>b → coeficiente linear.</li>
+                    </ul>
+                    <p>Exemplo: f(x) = 2x + 3. Se x = 4:</p>
+                    <div class="formula">f(4) = 2 · 4 + 3<br>f(4) = 11</div>
+                    <p>As funções podem ser representadas por:</p>
+                    <ul>
+                        <li>fórmulas;</li>
+                        <li>tabelas;</li>
+                        <li>gráficos;</li>
+                        <li>situações-problema.</li>
+                    </ul>
+                    <p>No ENEM, é muito importante saber interpretar o gráfico e relacioná-lo com a situação apresentada.</p>
+
+                    <h2>12. Fórmulas importantes</h2>
+
+                    <h3>Equação do 1º grau</h3>
+                    <div class="formula">ax + b = 0</div>
+
+                    <h3>Equação do 2º grau</h3>
+                    <div class="formula">ax² + bx + c = 0</div>
+
+                    <h3>Discriminante</h3>
+                    <div class="formula">Δ = b² - 4ac</div>
+
+                    <h3>Fórmula de Bhaskara</h3>
+                    <div class="formula">x = (-b ± √Δ) / 2a</div>
+
+                    <h3>Produtos notáveis</h3>
+                    <div class="formula">(a + b)² = a² + 2ab + b²<br>(a - b)² = a² - 2ab + b²<br>(a + b)(a - b) = a² - b²</div>
+
+                    <h3>Porcentagem</h3>
+                    <div class="formula">p% = p/100</div>
+
+                    <h3>Função afim</h3>
+                    <div class="formula">f(x) = ax + b</div>
+
+                </div>
+
+                <!-- Para adicionar um conteúdo novo, copie o bloco abaixo, tire o comentário e troque o id e o texto:
+
+                <div class="texto-conteudo oculto" id="conteudo-NOME">
+                    <h2>1. Título</h2>
+                    <p>Texto...</p>
+                </div>
+                -->
+
             </div>
 
         </section>
 
     </main>
+
+
+    <script>
+        // Temas de cada matéria. "pronto: true" = já tem conteúdo em texto.
+        // Para adicionar um conteúdo novo: coloque um item aqui e crie o bloco
+        // <div class="texto-conteudo oculto" id="conteudo-ID"> no HTML (mesmo id do tema).
+        const materias = {
+            matematica: {
+                nome: '📐 Matemática',
+                temas: [
+                    { id: 'algebra1', titulo: 'Álgebra I', descricao: 'Expressões, equações, funções e mais', pronto: true },
+                    { id: 'geometria', titulo: 'Geometria', descricao: 'Em breve', pronto: false },
+                    { id: 'funcoes', titulo: 'Funções', descricao: 'Em breve', pronto: false }
+                ]
+            },
+            portugues: {
+                nome: '📖 Português',
+                temas: [
+                    { id: 'gramatica', titulo: 'Gramática', descricao: 'Em breve', pronto: false },
+                    { id: 'interpretacao', titulo: 'Interpretação de texto', descricao: 'Em breve', pronto: false },
+                    { id: 'redacao', titulo: 'Redação', descricao: 'Em breve', pronto: false }
+                ]
+            },
+            historia: {
+                nome: '🏛️ História',
+                temas: [
+                    { id: 'historia-brasil', titulo: 'História do Brasil', descricao: 'Em breve', pronto: false },
+                    { id: 'historia-geral', titulo: 'História Geral', descricao: 'Em breve', pronto: false }
+                ]
+            },
+            biologia: {
+                nome: '🧬 Biologia',
+                temas: [
+                    { id: 'genetica', titulo: 'Genética', descricao: 'Em breve', pronto: false },
+                    { id: 'corpo-humano', titulo: 'Corpo humano', descricao: 'Em breve', pronto: false },
+                    { id: 'ecologia', titulo: 'Ecologia', descricao: 'Em breve', pronto: false }
+                ]
+            }
+        };
+
+        const telaMaterias = document.getElementById('telaMaterias');
+        const telaTemas = document.getElementById('telaTemas');
+        const telaConteudo = document.getElementById('telaConteudo');
+        const listaTemas = document.getElementById('listaTemas');
+        const tituloMateria = document.getElementById('tituloMateria');
+
+        // Mostra só uma tela por vez
+        function mostrarTela(tela) {
+            [telaMaterias, telaTemas, telaConteudo].forEach(t => t.classList.remove('aberta'));
+            tela.classList.add('aberta');
+            window.scrollTo(0, 0);
+        }
+
+        // Clicou em "Entrar" de uma matéria -> lista de temas
+        document.querySelectorAll('[data-materia]').forEach(botao => {
+            botao.addEventListener('click', function (e) {
+                e.preventDefault();
+                const materia = materias[botao.dataset.materia];
+
+                tituloMateria.textContent = materia.nome;
+                listaTemas.innerHTML = '';
+
+                materia.temas.forEach(tema => {
+                    const item = document.createElement('div');
+                    item.className = 'item-lista' + (tema.pronto ? '' : ' em-breve');
+                    item.innerHTML =
+                        '<div class="item-icone">📄</div>' +
+                        '<div class="item-info"><h3>' + tema.titulo + '</h3>' +
+                        '<p class="professor">' + tema.descricao + '</p></div>' +
+                        '<a href="#" class="botao ' + (tema.pronto ? 'verde' : 'desativado') + '">' +
+                        (tema.pronto ? 'Estudar' : 'Em breve') + '</a>';
+
+                    if (tema.pronto) {
+                        item.querySelector('.botao').addEventListener('click', function (ev) {
+                            ev.preventDefault();
+
+                            // esconde todos os textos e mostra só o do tema clicado
+                            document.querySelectorAll('.texto-conteudo').forEach(t => t.classList.add('oculto'));
+                            document.getElementById('conteudo-' + tema.id).classList.remove('oculto');
+
+                            document.getElementById('tituloConteudo').textContent = 'Resumo de ' + tema.titulo;
+                            document.getElementById('subtituloConteudo').textContent = materia.nome;
+
+                            mostrarTela(telaConteudo);
+                        });
+                    }
+
+                    listaTemas.appendChild(item);
+                });
+
+                mostrarTela(telaTemas);
+            });
+        });
+
+        document.getElementById('voltarMaterias').addEventListener('click', () => mostrarTela(telaMaterias));
+        document.getElementById('voltarTemas').addEventListener('click', () => mostrarTela(telaTemas));
+    </script>
 
 </body>
 
