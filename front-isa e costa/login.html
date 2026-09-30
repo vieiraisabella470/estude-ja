@@ -8,6 +8,7 @@
     <title>Entrar - Estuda Já</title>
 
     <link rel="stylesheet" href="sty.css">
+    <script src="sessao.js" defer></script>
 </head>
 
 <body class="pagina-auth">
@@ -26,13 +27,13 @@
 
             <div class="campo">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com">
+                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" autocomplete="email" required>
                 <p class="mensagem-erro" id="erroEmail"></p>
             </div>
 
             <div class="campo">
                 <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="current-password" minlength="6" required>
                 <p class="mensagem-erro" id="erroSenha"></p>
             </div>
 
@@ -96,16 +97,21 @@
             botaoEntrar.disabled = true;
             botaoEntrar.textContent = 'Entrando...';
 
-            // Aqui é só a validação do front-end. Quando o back-end
-            // estiver pronto, troque este trecho pela chamada real de login.
-            setTimeout(function () {
-                status.className = 'status-auth mostrar sucesso';
-                status.textContent = 'Login validado! Redirecionando para o site...';
-                botaoEntrar.textContent = 'Redirecionando...';
+            const conta = window.EstudaJaSession.account();
+            if (!conta || conta.email !== emailValor.toLowerCase()) {
+                status.className = 'status-auth mostrar erro';
+                status.textContent = 'Não encontramos esse cadastro neste navegador. Crie uma conta para continuar.';
+                botaoEntrar.disabled = false;
+                botaoEntrar.textContent = 'Entrar';
+                return;
+            }
 
-                                setTimeout(function () {
-                    window.location.href = 'materias.html';
-                }, 1200);
+            window.EstudaJaSession.startSession(conta);
+            status.className = 'status-auth mostrar sucesso';
+            status.textContent = 'Bem-vindo(a), ' + conta.name + '! Redirecionando...';
+            botaoEntrar.textContent = 'Redirecionando...';
+            setTimeout(function () {
+                window.location.href = 'materias.html';
             }, 700);
         });
     </script>

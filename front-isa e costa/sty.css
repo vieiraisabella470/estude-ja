@@ -53,6 +53,11 @@ body {
     min-height: 100vh;
     background-color: #5720b7;
     padding: 25px 15px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    box-shadow: 8px 0 22px rgba(57, 32, 117, 0.14);
 }
 
 .logo-menu {
@@ -84,17 +89,20 @@ body {
     margin-bottom: 10px;
     display: block;
     border-radius: 5px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .menu button:hover,
 .menu a:hover {
     background-color: #6d36ca;
+    transform: translateX(4px);
 }
 
 /* Item ativo: a página em que o usuário está */
 .menu a.ativo {
     background-color: #42a88d;
     font-weight: bold;
+    box-shadow: inset 4px 0 0 #ffffff;
 }
 
 .menu a.ativo:hover {
@@ -547,7 +555,40 @@ body.pagina-publica {
 .acoes-publicas {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
+}
+
+.acoes-publicas > .botao,
+.acoes-publicas > .botao-login,
+.acoes-publicas > .botao-sair {
+    height: 50px;
+    min-height: 50px;
+    margin-top: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.botao-logado {
+    opacity: 0.78;
+    cursor: default;
+}
+
+@media (min-width: 701px) {
+    .topo-publico {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    }
+
+    .logo-publico {
+        grid-column: 1;
+    }
+
+    .acoes-publicas {
+        grid-column: 2;
+        justify-content: center;
+    }
 }
 
 
@@ -683,6 +724,45 @@ body.pagina-publica {
     background-color: #f7f5fb;
     color: #999;
     font-size: 13px;
+}
+
+@keyframes entrada-pagina {
+    from {
+        opacity: 0.96;
+        transform: scale(0.992);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes saida-pagina {
+    to {
+        opacity: 0.97;
+        transform: scale(0.996);
+    }
+}
+
+.principal .conteudo,
+body.pagina-publica .conteudo-publico {
+    animation: entrada-pagina 0.24s ease-out both;
+}
+
+body.pagina-saindo .principal .conteudo,
+body.pagina-saindo.pagina-publica .conteudo-publico {
+    animation: saida-pagina 0.18s ease-in both;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 /* Celular: topo, hero e botões centralizados */
@@ -951,6 +1031,38 @@ body.pagina-auth {
     background: linear-gradient(135deg, #5720b7, #42a88d);
     color: white;
     font-size: 40px;
+}
+
+.video-thumb.materia-matematica {
+    background: linear-gradient(135deg, #4f25b5, #4aa88f);
+}
+
+.video-thumb.materia-historia {
+    background: linear-gradient(135deg, #9a562b, #d59a4f);
+}
+
+.video-thumb.materia-portugues {
+    background: linear-gradient(135deg, #4a4e9a, #7798ce);
+}
+
+.icone-materia {
+    font-size: 42px;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.icone-play {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    padding-left: 2px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.88);
+    color: #5720b7;
+    font-size: 15px;
 }
 
 .video-thumb .duracao {
@@ -1858,6 +1970,193 @@ body.pagina-auth {
 .conquista p {
     color: #888;
     font-size: 12px;
+}
+
+/* Sessão e adaptação a diferentes resoluções */
+.botao-sair {
+    min-height: 42px;
+    padding: 0 16px;
+    border: 1px solid currentColor;
+    border-radius: 12px;
+    background: transparent;
+    color: #5720b7;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.topo-publico .botao-sair {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+.botao-sair:hover,
+.botao-sair:focus-visible {
+    background: rgba(87, 32, 183, 0.1);
+}
+
+.topo-publico .botao-sair:hover,
+.topo-publico .botao-sair:focus-visible {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.botao-sair:focus-visible,
+.botao-login:focus-visible,
+.botao:focus-visible,
+a:focus-visible {
+    outline: 3px solid #f5a623;
+    outline-offset: 3px;
+}
+
+img,
+svg,
+video,
+iframe {
+    max-width: 100%;
+}
+
+@media (min-width: 701px) {
+    .hero-publico {
+        justify-content: center;
+    }
+
+    .hero-texto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-botoes {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 900px) {
+    .conteudo-publico {
+        padding: 40px clamp(20px, 5vw, 40px);
+    }
+
+    .hero-publico {
+        gap: 28px;
+        margin-bottom: 44px;
+    }
+
+    .destaques-publicos {
+        margin-bottom: 44px;
+    }
+
+    .video-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    body {
+        display: block;
+        min-width: 320px;
+    }
+
+    .menu {
+        width: 100%;
+        min-height: auto;
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow-x: auto;
+    }
+
+    .logo-menu {
+        margin: 0;
+        min-width: max-content;
+        padding: 10px 12px;
+    }
+
+    .menu a,
+    .menu button {
+        width: auto;
+        min-width: max-content;
+        margin: 0;
+        padding: 10px 12px;
+    }
+
+    .principal {
+        width: 100%;
+    }
+
+    .topo {
+        height: auto;
+        min-height: 76px;
+        padding: 12px 16px;
+        flex-wrap: wrap;
+    }
+
+    .topo input {
+        width: auto;
+        flex: 1 1 210px;
+    }
+
+    .conteudo {
+        padding: 24px 16px;
+    }
+
+    .containers,
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .topo-publico,
+    .acoes-publicas {
+        justify-content: center;
+    }
+
+    .acoes-publicas {
+        flex-wrap: wrap;
+    }
+
+    .hero-publico {
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 36px;
+    }
+
+    .hero-texto,
+    .hero-ilustracao {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .hero-botoes {
+        justify-content: center;
+    }
+
+    .hero-texto h1 {
+        font-size: clamp(30px, 9vw, 40px);
+    }
+
+    .destaque-item {
+        width: min(100%, 320px);
+    }
+}
+
+@media (max-width: 430px) {
+    .topo-publico {
+        padding: 14px 16px;
+    }
+
+    .acoes-publicas,
+    .hero-botoes {
+        width: 100%;
+    }
+
+    .acoes-publicas .botao,
+    .acoes-publicas .botao-login,
+    .acoes-publicas .botao-sair,
+    .hero-botoes .botao {
+        justify-content: center;
+        flex: 1 1 100%;
+    }
 }
 
 

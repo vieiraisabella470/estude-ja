@@ -8,6 +8,7 @@
     <title>Criar conta - Estuda Já</title>
 
     <link rel="stylesheet" href="sty.css">
+    <script src="sessao.js" defer></script>
 </head>
 
 <body class="pagina-auth">
@@ -26,25 +27,25 @@
 
             <div class="campo">
                 <label for="nome">Nome completo</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite seu nome">
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome" autocomplete="name" required>
                 <p class="mensagem-erro" id="erroNome"></p>
             </div>
 
             <div class="campo">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com">
+                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" autocomplete="email" required>
                 <p class="mensagem-erro" id="erroEmail"></p>
             </div>
 
             <div class="campo">
                 <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" placeholder="Crie uma senha">
+                <input type="password" id="senha" name="senha" placeholder="Crie uma senha" autocomplete="new-password" minlength="6" required>
                 <p class="mensagem-erro" id="erroSenha"></p>
             </div>
 
             <div class="campo">
                 <label for="confirmarSenha">Confirmar senha</label>
-                <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Digite a senha novamente">
+                <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Digite a senha novamente" autocomplete="new-password" minlength="6" required>
                 <p class="mensagem-erro" id="erroConfirmarSenha"></p>
             </div>
 
@@ -141,16 +142,13 @@
             botaoCadastrar.disabled = true;
             botaoCadastrar.textContent = 'Criando conta...';
 
-            // Aqui é só a validação do front-end. Quando o back-end
-            // estiver pronto, troque este trecho pela chamada real de cadastro.
+            const conta = window.EstudaJaSession.saveAccount({ name: nomeValor, email: emailValor });
+            window.EstudaJaSession.startSession(conta);
+            status.className = 'status-auth mostrar sucesso';
+            status.textContent = 'Cadastro concluído! Bem-vindo(a), ' + conta.name + '.';
+            botaoCadastrar.textContent = 'Redirecionando...';
             setTimeout(function () {
-                status.className = 'status-auth mostrar sucesso';
-                status.textContent = 'Cadastro validado! Redirecionando para o site...';
-                botaoCadastrar.textContent = 'Redirecionando...';
-
-                                setTimeout(function () {
-                    window.location.href = 'materias.html';
-                }, 1200);
+                window.location.href = 'materias.html';
             }, 700);
         });
     </script>
