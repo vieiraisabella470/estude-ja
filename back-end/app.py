@@ -1,4 +1,5 @@
 import argparse
+import datetime
 import getpass
 import hashlib
 import hmac
@@ -20,6 +21,10 @@ DB = Path(os.environ.get('ESTUDAJA_DB', str(ROOT / 'data' / 'estudaja.db')))
 SECURE = os.environ.get('ESTUDAJA_HTTPS') == '1'
 LOCK = threading.Lock()
 ATTEMPTS = {}
+SESSION_SECONDS = 43200
+MAX_REQUEST_BODY = 100000
+CONTENT_KINDS = {'video', 'material', 'activity', 'quiz', 'site'}
+QUESTION_CONTENT_KINDS = {'activity', 'quiz'}
 
 @contextmanager
 def database():
@@ -37,11 +42,17 @@ def database():
 
 def password_hash(password, salt=None):
     salt = salt or secrets.token_hex(16)
-    digest = hashlib.pbkdf2_hmac('sha256', password.encode(), salt.encode(), 600000).hex()
+    digest = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt.encode('utf-8'), 600000).hex()
     return salt + ':' + digest
 
 def password_ok(password, encoded):
-    return hmac.compare_digest(password_hash(password, encoded.split(':')[0]), encoded)
+    try:
+        salt, digest = encoded.split(':', 1)
+    except (AttributeError, ValueError):
+        return False
+    if not salt or not digest:
+        return False
+    return hmac.compare_digest(password_hash(password, salt), encoded)
 
 def initialize():
     DB.parent.mkdir(parents=True, exist_ok=True)
@@ -97,6 +108,12 @@ def valid_url(value):
     except ValueError:
         return False
 
+def request_id(data):
+    value = data.get('id')
+    if type(value) is not int or value < 1:
+        raise ValueError('Identificador inválido.')
+    return value
+
 def validate_content(data):
     result = {}
     for key, limit in [('kind',20),('title',160),('subject',60),('description',10000),('url',2000),('image',2000),('teacher',100),('duration',30)]:
@@ -104,19 +121,28 @@ def validate_content(data):
         if not isinstance(value,str) or len(value)>limit:
             raise ValueError('Campo inválido: ' + key)
         result[key] = value.strip()
-    if result['kind'] not in ['video','material','activity','quiz','site'] or not result['title'] or not result['subject']:
+    if result['kind'] not in CONTENT_KINDS or not result['title'] or not result['subject']:
         raise ValueError('Informe tipo, título e matéria.')
     if not valid_url(result['url']) or not valid_url(result['image']):
         raise ValueError('Use links completos começando com https://.')
     questions = data.get('questions',[])
     if not isinstance(questions,list) or len(questions)>50:
         raise ValueError('Use uma lista com até 50 questões.')
-    for q in questions:
-        if not isinstance(q,dict) or not isinstance(q.get('prompt'),str) or not 1 <= len(q['prompt']) <= 1000 or not isinstance(q.get('options'),list) or not 2 <= len(q['options']) <= 6 or not all(isinstance(x,str) and 1 <= len(x) <= 500 for x in q['options']) or type(q.get('answer')) is not int or not 0 <= q['answer'] < len(q['options']):
+    cleaned_questions = []
+    for question in questions:
+        if not isinstance(question,dict) or not isinstance(question.get('prompt'),str) or not isinstance(question.get('options'),list) or type(question.get('answer')) is not int:
             raise ValueError('Cada questão precisa de enunciado, 2 a 6 alternativas e índice da resposta correta.')
-    if result['kind'] in ['activity','quiz'] and not questions:
+        prompt = question['prompt'].strip()
+        options = [option.strip() if isinstance(option,str) else None for option in question['options']]
+        answer = question['answer']
+        if not 1 <= len(prompt) <= 1000 or not 2 <= len(options) <= 6 or not all(option is not None and 1 <= len(option) <= 500 for option in options) or not 0 <= answer < len(options):
+            raise ValueError('Cada questão precisa de enunciado, 2 a 6 alternativas e índice da resposta correta.')
+        cleaned_questions.append({'prompt':prompt,'options':options,'answer':answer})
+    if result['kind'] in QUESTION_CONTENT_KINDS and not cleaned_questions:
         raise ValueError('Adicione pelo menos uma questão.')
-    result['questions'] = json.dumps(questions,ensure_ascii=False)
+    if result['kind'] not in QUESTION_CONTENT_KINDS and cleaned_questions:
+        raise ValueError('Apenas atividades e quizzes podem ter questões.')
+    result['questions'] = json.dumps(cleaned_questions,ensure_ascii=False)
     return result
 
 class Handler(BaseHTTPRequestHandler):
@@ -152,7 +178,9 @@ class Handler(BaseHTTPRequestHandler):
         if not token:
             return None
         with database() as db:
-            return db.execute('SELECT sessions.*, users.name,users.email,users.admin FROM sessions JOIN users ON users.id=sessions.user_id WHERE token=? AND expires>?',(hashlib.sha256(token.value.encode()).hexdigest(),time.time())).fetchone()
+            now = time.time()
+            db.execute('DELETE FROM sessions WHERE expires<=?',(now,))
+            return db.execute('SELECT sessions.*, users.name,users.email,users.admin FROM sessions JOIN users ON users.id=sessions.user_id WHERE token=? AND expires>?',(hashlib.sha256(token.value.encode('utf-8')).hexdigest(),now)).fetchone()
 
     def do_GET(self):
         try:
@@ -207,7 +235,7 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         try:
             length = int(self.headers.get('Content-Length','0'))
-            if not 0 < length <= 100000:
+            if not 0 < length <= MAX_REQUEST_BODY:
                 return self.respond(413,{'error':'Dados ausentes ou muito grandes.'})
             if self.headers.get('Content-Type','').split(';')[0] != 'application/json':
                 return self.respond(415,{'error':'Envie JSON.'})
@@ -261,9 +289,9 @@ class Handler(BaseHTTPRequestHandler):
                     return self.respond(401,{'error':'E-mail ou senha incorretos.'})
                 token,csrf = secrets.token_urlsafe(32),secrets.token_urlsafe(32)
                 db.execute('DELETE FROM sessions WHERE expires<?',(now,))
-                db.execute('INSERT INTO sessions VALUES(?,?,?,?)',(hashlib.sha256(token.encode()).hexdigest(),user['id'],csrf,now+43200))
+                db.execute('INSERT INTO sessions VALUES(?,?,?,?)',(hashlib.sha256(token.encode('utf-8')).hexdigest(),user['id'],csrf,now+SESSION_SECONDS))
             # A transação acima já foi confirmada antes de informar sucesso.
-            return self.respond(200,{'ok':True},cookie=f'estudaja_session={token}; HttpOnly; SameSite=Lax; Path=/; Max-Age=43200'+('; Secure' if SECURE else ''))
+            return self.respond(200,{'ok':True},cookie=f'estudaja_session={token}; HttpOnly; SameSite=Lax; Path=/; Max-Age={SESSION_SECONDS}'+('; Secure' if SECURE else ''))
         session = self.session()
         if not session:
             return self.respond(401,{'error':'Entre na sua conta para continuar.'})
@@ -277,51 +305,63 @@ class Handler(BaseHTTPRequestHandler):
                 if not session['admin']:
                     return self.respond(403,{'error':'Acesso exclusivo do administrador.'})
                 if path == '/api/admin/delete':
-                    db.execute('DELETE FROM content WHERE id=?',(int(data['id']),))
+                    content_id = request_id(data)
+                    if db.execute('DELETE FROM content WHERE id=?',(content_id,)).rowcount != 1:
+                        return self.respond(404,{'error':'Conteúdo não encontrado.'})
                 elif path == '/api/admin/save':
                     try:
                         item = validate_content(data)
                     except ValueError as exc:
                         return self.respond(400,{'error':str(exc)})
-                    if data.get('id'):
-                        db.execute('UPDATE content SET '+','.join(k+'=?' for k in item)+' WHERE id=?',(*item.values(),int(data['id'])))
+                    if data.get('id') is not None:
+                        content_id = request_id(data)
+                        updated = db.execute('UPDATE content SET '+','.join(key+'=?' for key in item)+' WHERE id=?',(*item.values(),content_id))
+                        if updated.rowcount != 1:
+                            return self.respond(404,{'error':'Conteúdo não encontrado.'})
                         # Uma atividade alterada precisa ser resolvida novamente.
-                        db.execute('DELETE FROM progress WHERE content_id=?',(int(data['id']),))
+                        db.execute('DELETE FROM progress WHERE content_id=?',(content_id,))
                     else:
                         db.execute('INSERT INTO content('+','.join(item)+') VALUES('+','.join('?' for _ in item)+')',tuple(item.values()))
                 else:
                     return self.respond(404,{'error':'Ação não encontrada.'})
                 return self.respond(200,{'ok':True})
             if path in ['/api/complete','/api/answer']:
-                item = db.execute('SELECT * FROM content WHERE id=?',(int(data['id']),)).fetchone()
+                content_id = request_id(data)
+                item = db.execute('SELECT * FROM content WHERE id=?',(content_id,)).fetchone()
                 if not item:
                     return self.respond(404,{'error':'Conteúdo não encontrado.'})
                 score = 100
-                if item['kind'] in ['quiz','activity']:
+                if item['kind'] in QUESTION_CONTENT_KINDS:
                     if path != '/api/answer':
                         return self.respond(400,{'error':'Responda às questões primeiro.'})
                     questions = json.loads(item['questions'])
                     answers = data.get('answers')
-                    if not isinstance(answers,list) or len(answers)!=len(questions) or any(type(a) is not int or a<0 or a>=len(q['options']) for a,q in zip(answers,questions)):
+                    if not questions or not isinstance(answers,list) or len(answers)!=len(questions) or any(type(answer) is not int or answer<0 or answer>=len(question['options']) for answer,question in zip(answers,questions)):
                         return self.respond(400,{'error':'Responda a todas as questões.'})
-                    score = round(100*sum(a==q['answer'] for a,q in zip(answers,questions))/len(questions))
+                    score = round(100*sum(answer==question['answer'] for answer,question in zip(answers,questions))/len(questions))
                 elif path != '/api/complete':
                     return self.respond(400,{'error':'Este conteúdo não possui questões.'})
                 db.execute('INSERT INTO progress(user_id,content_id,score) VALUES(?,?,?) ON CONFLICT(user_id,content_id) DO UPDATE SET score=excluded.score,completed=CURRENT_TIMESTAMP',(session['user_id'],item['id'],score))
                 return self.respond(200,{'score':score})
             if path == '/api/plans/save':
                 title,day = data.get('title',''),data.get('day','')
-                import datetime
-                datetime.date.fromisoformat(day)
-                if not isinstance(title,str) or not 1<=len(title.strip())<=160:
-                    raise ValueError()
+                if not isinstance(title,str) or not isinstance(day,str) or not 1<=len(title.strip())<=160:
+                    return self.respond(400,{'error':'Informe um título e uma data válidos.'})
+                try:
+                    datetime.date.fromisoformat(day)
+                except ValueError:
+                    return self.respond(400,{'error':'Informe uma data válida.'})
                 db.execute('INSERT INTO plans(user_id,title,day) VALUES(?,?,?)',(session['user_id'],title.strip(),day))
                 return self.respond(200,{'ok':True})
             if path == '/api/plans/toggle':
-                db.execute('UPDATE plans SET done=1-done WHERE id=? AND user_id=?',(int(data['id']),session['user_id']))
+                plan_id = request_id(data)
+                if db.execute('UPDATE plans SET done=1-done WHERE id=? AND user_id=?',(plan_id,session['user_id'])).rowcount != 1:
+                    return self.respond(404,{'error':'Planejamento não encontrado.'})
                 return self.respond(200,{'ok':True})
             if path == '/api/plans/delete':
-                db.execute('DELETE FROM plans WHERE id=? AND user_id=?',(int(data['id']),session['user_id']))
+                plan_id = request_id(data)
+                if db.execute('DELETE FROM plans WHERE id=? AND user_id=?',(plan_id,session['user_id'])).rowcount != 1:
+                    return self.respond(404,{'error':'Planejamento não encontrado.'})
                 return self.respond(200,{'ok':True})
         self.respond(404,{'error':'Ação não encontrada.'})
 
