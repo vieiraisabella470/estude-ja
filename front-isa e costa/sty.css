@@ -1,9 +1,35 @@
+/* ===========================================================
+   ESTUDA JÁ - FOLHA DE ESTILO (sty.css)
+
+   SUMÁRIO
+   1. Base (reset e body)
+   2. Layout do sistema (menu lateral, topo e área de conteúdo)
+   3. Componentes compartilhados entre páginas
+   4. Sobre nós (página pública)
+   5. Login, Cadastro e Esqueci a senha
+   6. Vídeo Aulas
+   7. Atividades
+   8. Meu Progresso
+   9. Matérias
+   10. Quizzes
+   11. Nível de Aprendizagem
+   12. Sem uso no momento
+
+   Regra para editar: mexeu numa página? Procure a seção dela.
+   Mexeu num botão, filtro, lista ou card que aparece em mais
+   de uma página? Ele está na seção 3 e muda em todas elas.
+   =========================================================== */
+
+/* ===========================================================
+   1. BASE (reset e body)
+   Vale para todas as páginas.
+   =========================================================== */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 
 body {
     font-family: Arial, sans-serif;
@@ -13,7 +39,14 @@ body {
 
 
 
-/*MENU LATERAL */
+/* ===========================================================
+   2. LAYOUT DO SISTEMA
+   Usado em: Vídeo Aulas, Atividades, Meu Progresso, Matérias,
+   Quizzes e Nível de Aprendizagem (todas as que têm menu lateral).
+   O botão .botao-login também aparece no topo da página Sobre nós.
+   =========================================================== */
+
+/* ----- Menu lateral ----- */
 
 .menu {
     width: 235px;
@@ -22,55 +55,43 @@ body {
     padding: 25px 15px;
 }
 
-
-
 .logo-menu {
     background-color: #42a88d;
     color: white;
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 30px;
-
     display: flex;
     align-items: center;
     gap: 10px;
-
 }
 
 .logo-menu h2 {
     font-size: 20px;
 }
 
-
 .menu button,
 .menu a {
     width: 100%;
     padding: 15px 10px;
-
     background: none;
     border: none;
-
     color: white;
     text-align: left;
     text-decoration: none;
-
     font-size: 16px;
     cursor: pointer;
-
     margin-bottom: 10px;
-
     display: block;
     border-radius: 5px;
 }
-
 
 .menu button:hover,
 .menu a:hover {
     background-color: #6d36ca;
 }
 
-
-/* ITEM ATIVO: a página em que o usuário está */
+/* Item ativo: a página em que o usuário está */
 .menu a.ativo {
     background-color: #42a88d;
     font-weight: bold;
@@ -81,80 +102,55 @@ body {
 }
 
 
-
-/* ÁREA PRINCIPAL */
+/* ----- Área principal e barra do topo (busca + botão Entrar) ----- */
 
 .principal {
     width: calc(100% - 235px);
 }
 
-
 .topo {
     height: 90px;
-
     background-color: #5c21bd;
-
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
 }
 
-
 .topo input {
     width: 60%;
     height: 50px;
-
     border: none;
     border-radius: 15px 0 0 15px;
-
     padding: 0 20px;
-
     font-size: 16px;
-
     outline: none;
 }
-
-
 
 .botao-pesquisa {
     height: 50px;
     width: 55px;
-
     border: none;
-
     background-color: white;
-
     border-radius: 0 15px 15px 0;
-
     font-size: 18px;
-
     cursor: pointer;
 }
 
-
-/* BOTÃO DE LOGIN (cabeçalho) */
 .botao-login {
     height: 50px;
-
     padding: 0 22px;
-
     border: none;
     border-radius: 15px;
-
     background-color: #42a88d;
     color: white;
-
     font-size: 15px;
     font-weight: bold;
-
     text-decoration: none;
     white-space: nowrap;
-
     display: flex;
     align-items: center;
     gap: 6px;
-
     cursor: pointer;
 }
 
@@ -163,40 +159,14 @@ body {
 }
 
 
-/* CONTEÚDO */
+/* ----- Área de conteúdo e cabeçalho (título) das páginas internas ----- */
+
 .conteudo {
     max-width: 1000px;
-
     margin: auto;
-
     padding: 25px;
 }
 
-
-
-/* TÍTULO DA HOME (hero grande, centralizado)  */
-.titulo {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.titulo h1 {
-    color: #392075;
-    font-size: 35px;
-}
-
-.titulo h1 span {
-    color: #42a88d;
-}
-
-.titulo p {
-    color: #368c76;
-    font-size: 20px;
-    margin-top: 10px;
-}
-
-
-/*CABEÇALHO DAS PÁGINAS INTERNAS (Matérias, Vídeo Aulas, Atividades...)*/
 .cabecalho-pagina {
     margin-bottom: 25px;
 }
@@ -212,36 +182,101 @@ body {
     font-size: 16px;
 }
 
+/* Celular: menu mais estreito e campo de busca maior */
+@media (max-width: 700px) {
 
-/* Barra de busca dentro do conteúdo  */
-.busca-pagina {
-    display: flex;
-    max-width: 500px;
-    margin: 20px 0;
+    .menu {
+        width: 180px;
+    }
+
+    .principal {
+        width: calc(100% - 180px);
+    }
+
+    .topo input {
+        width: 70%;
+    }
+
 }
 
-.busca-pagina input {
-    flex: 1;
-    height: 48px;
-    border: 1px solid #ddd;
-    border-radius: 10px 0 0 10px;
-    padding: 0 18px;
+
+
+/* ===========================================================
+   3. COMPONENTES COMPARTILHADOS
+   Cada bloco diz em quais páginas é usado.
+   Alterar aqui muda todas essas páginas ao mesmo tempo.
+   =========================================================== */
+
+/* ----- Botão .botao / .botao.verde -----
+   Usado em: Sobre nós, Login, Cadastro, Esqueci a senha, Atividades, Matérias, Quizzes */
+
+.botao {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 8px;
+    background-color: #6724c7;
+    color: white;
     font-size: 15px;
-    outline: none;
-}
-
-.busca-pagina button {
-    width: 50px;
-    border: 1px solid #ddd;
-    border-left: none;
-    background-color: #f5f5f5;
-    border-radius: 0 10px 10px 0;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 16px;
+    text-decoration: none;
+}
+
+.botao:hover {
+    background-color: #5720b7;
+}
+
+.botao.verde {
+    background-color: #42a88d;
+}
+
+.botao.verde:hover {
+    background-color: #368c76;
 }
 
 
-/* Todas / Matemática / História... */
+/* ----- Utilitário .oculto (esconde um elemento) -----
+   Usado em: Atividades e Matérias */
+
+.oculto {
+    display: none !important;
+}
+
+
+/* ----- Link/botão Voltar -----
+   Usado em: Esqueci a senha e Matérias */
+
+.link-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #888;
+    text-decoration: none;
+    margin-bottom: 18px;
+}
+
+.link-voltar:hover {
+    color: #6724c7;
+}
+
+
+/* ----- Título de seção .titulo-secao -----
+   Usado em: Meu Progresso e Nível de Aprendizagem */
+
+.titulo-secao {
+    color: #392075;
+    font-size: 19px;
+    margin-bottom: 16px;
+}
+
+
+/* ----- Filtros em pílula (Todas / Matemática / ...) -----
+   Usado em: Vídeo Aulas, Atividades e Quizzes */
+
 .filtros {
     display: flex;
     gap: 10px;
@@ -271,15 +306,131 @@ body {
 }
 
 
+/* ----- Barra de busca dentro do conteúdo -----
+   Usado em: Vídeo Aulas e Atividades */
 
-/*GRID GENÉRICO (usado na home e em Matérias)  */
+.busca-pagina {
+    display: flex;
+    max-width: 500px;
+    margin: 20px 0;
+}
+
+.busca-pagina input {
+    flex: 1;
+    height: 48px;
+    border: 1px solid #ddd;
+    border-radius: 10px 0 0 10px;
+    padding: 0 18px;
+    font-size: 15px;
+    outline: none;
+}
+
+.busca-pagina button {
+    width: 50px;
+    border: 1px solid #ddd;
+    border-left: none;
+    background-color: #f5f5f5;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Celular: busca ocupa toda a largura */
+@media (max-width: 700px) {
+
+    .busca-pagina {
+        max-width: 100%;
+    }
+
+}
+
+
+/* ----- Lista de itens (ícone + texto + botão) -----
+   Usado em: Atividades e Matérias (lista de temas) */
+
+.lista-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.item-lista {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.item-icone {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: white;
+    background: linear-gradient(135deg, #5720b7, #42a88d);
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-info h3 {
+    color: #333;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.item-info .professor {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.item-info .meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    color: #888;
+    font-size: 13px;
+}
+
+.item-lista .botao {
+    margin-top: 0;
+    flex-shrink: 0;
+}
+
+/* Celular: item empilhado e botão em largura total */
+@media (max-width: 700px) {
+
+    .item-lista {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .item-lista .botao {
+        width: 100%;
+        text-align: center;
+    }
+
+}
+
+
+/* ----- Cards de conteúdo (.containers / .container) -----
+   Usado em: Matérias e Sobre nós */
+
 .containers {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
-
-
 
 .container {
     border: 1px solid #ccc;
@@ -287,14 +438,6 @@ body {
     overflow: hidden;
     background-color: white;
 }
-
-/* destaque de card selecionado*/
-.container.selecionada {
-    border: 2px solid #42a88d;
-    box-shadow: 0 0 0 4px rgba(66, 168, 141, 0.15);
-}
-
-
 
 .cabecalho-container {
     background-color: #42a88d;
@@ -308,8 +451,6 @@ body {
     background-color: #6724c7;
 }
 
-
-/* CORPO DOS CONTAINERS */
 .corpo-container {
     padding: 20px;
     min-height: 100px;
@@ -324,36 +465,19 @@ body {
     color: #555;
 }
 
+/* Celular: um card por linha */
+@media (max-width: 700px) {
 
-/* Botões usados dentro dos cards (Entrar, Resolver, Continuar...) */
-.botao {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 12px 22px;
-    border: none;
-    border-radius: 8px;
-    background-color: #6724c7;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: none;
-}
+    .containers {
+        grid-template-columns: 1fr;
+    }
 
-.botao:hover {
-    background-color: #5720b7;
-}
-
-.botao.verde {
-    background-color: #42a88d;
-}
-
-.botao.verde:hover {
-    background-color: #368c76;
 }
 
 
-/* MENSAGEM DE INCENTIVO  */
+/* ----- Mensagem de incentivo -----
+   Usado em: Matérias e Sobre nós */
+
 .mensagem {
     display: flex;
     align-items: center;
@@ -378,689 +502,244 @@ body {
 
 
 
-/* PÁGINA DE VÍDEO AULAS */
-
-.video-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.video-card {
-    background-color: white;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-}
-
-.video-thumb {
-    position: relative;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: linear-gradient(135deg, #5720b7, #42a88d);
-    color: white;
-    font-size: 40px;
-}
-
-.video-thumb .duracao {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    font-size: 12px;
-    padding: 3px 8px;
-    border-radius: 5px;
-}
-
-.video-info {
-    padding: 15px;
-}
-
-.video-info h3 {
-    color: #333;
-    font-size: 16px;
-    margin-bottom: 5px;
-}
-
-.video-info .professor {
-    color: #777;
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-
-.video-info .tempo {
-    color: #888;
-    font-size: 13px;
-}
-
-
-/* LISTA DE ITENS (Atividades e Materiais de Aula) */
-
-.lista-itens {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.item-lista {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-
-    padding: 20px;
-
-    background-color: white;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-}
-
-.item-icone {
-    width: 60px;
-    height: 60px;
-    flex-shrink: 0;
-
-    border-radius: 10px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 26px;
-    color: white;
-
-    background: linear-gradient(135deg, #5720b7, #42a88d);
-}
-
-.item-info {
-    flex: 1;
-}
-
-.item-info h3 {
-    color: #333;
-    font-size: 17px;
-    margin-bottom: 5px;
-}
-
-.item-info .professor {
-    color: #777;
-    font-size: 14px;
-    margin-bottom: 6px;
-}
-
-.item-info .meta {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-
-    color: #888;
-    font-size: 13px;
-}
-
-.item-lista .botao {
-    margin-top: 0;
-    flex-shrink: 0;
-}
-
-
-
-
-
-
-
-/*  RESPONSIVO */
-
-@media (max-width: 700px) {
-
-    .menu {
-        width: 180px;
-    }
-
-    .principal {
-        width: calc(100% - 180px);
-    }
-
-    .containers {
-        grid-template-columns: 1fr;
-    }
-
-    .video-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .topo input {
-        width: 70%;
-    }
-
-    .busca-pagina {
-        max-width: 100%;
-    }
-    
-    .item-lista {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .item-lista .botao {
-        width: 100%;
-        text-align: center;
-    }
-
-    .quiz-grid,
-    .achv-grid,
-    .stat-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .progress-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .level-hero {
-        padding: 20px;
-    }
-}
-
-
-
 /* ===========================================================
-   PÁGINA DE QUIZZES
+   4. SOBRE NÓS (página pública / landing page)
+   Arquivo: sobre-nos.html
+   Não usa o menu lateral, por isso o body vira coluna.
+   Também usa: .botao, .containers, .mensagem (seção 3) e .botao-login (seção 2).
    =========================================================== */
 
-.quiz-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 18px;
-}
-
-.quiz-card {
-    background-color: white;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-
+body.pagina-publica {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    align-items: stretch;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #ffffff;
 }
 
-.quiz-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1);
-}
 
-.quiz-top {
+/* ----- Topo da página pública (logo + Entrar / Criar conta) ----- */
+
+.topo-publico {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-
-.quiz-icone {
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 20px;
-    color: white;
-
-    background: linear-gradient(135deg, #5720b7, #42a88d);
-}
-
-.selo {
-    font-size: 11px;
-    font-weight: bold;
-    padding: 4px 10px;
-    border-radius: 20px;
-}
-
-.selo.facil {
-    background-color: rgba(66, 168, 141, 0.15);
-    color: #368c76;
-}
-
-.selo.medio {
-    background-color: rgba(245, 166, 35, 0.18);
-    color: #a3690c;
-}
-
-.selo.dificil {
-    background-color: rgba(224, 85, 79, 0.15);
-    color: #c1443e;
-}
-
-.quiz-card h3 {
-    color: #333;
-    font-size: 16px;
-}
-
-.quiz-card .assunto {
-    color: #888;
-    font-size: 13px;
-    margin-top: -8px;
-}
-
-.quiz-meta {
-    display: flex;
-    gap: 14px;
-
-    color: #888;
-    font-size: 13px;
-}
-
-.quiz-card .botao {
-    text-align: center;
-    margin-top: 4px;
-}
-
-
-
-/* ===========================================================
-   PÁGINA DE NÍVEL DE APRENDIZAGEM
-   =========================================================== */
-
-.nivel-hero {
-    background: linear-gradient(120deg, #6724c7, #392075);
-    color: white;
-    border-radius: 12px;
-    padding: 28px;
-
-    display: flex;
-    align-items: center;
-    gap: 24px;
     flex-wrap: wrap;
-
-    margin-bottom: 30px;
-}
-
-.nivel-selo-grande {
-    width: 78px;
-    height: 78px;
-    border-radius: 50%;
-
-    background-color: rgba(255, 255, 255, 0.15);
-    border: 2px solid rgba(255, 255, 255, 0.4);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 30px;
-    font-weight: bold;
-    flex-shrink: 0;
-}
-
-.nivel-hero-texto {
-    flex: 1;
-    min-width: 220px;
-}
-
-.nivel-hero-texto .rotulo {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    opacity: 0.85;
-    font-weight: bold;
-}
-
-.nivel-hero-texto h2 {
-    margin: 4px 0 12px;
-    font-size: 22px;
-}
-
-.barra-xp-fundo {
-    background-color: rgba(255, 255, 255, 0.25);
-    border-radius: 20px;
-    height: 10px;
-    max-width: 340px;
-    overflow: hidden;
-}
-
-.barra-xp-preenchida {
-    height: 100%;
-    background-color: #42a88d;
-    border-radius: 20px;
-}
-
-.xp-legenda {
-    font-size: 12.5px;
-    opacity: 0.9;
-    margin-top: 8px;
-}
-
-.titulo-secao {
-    color: #392075;
-    font-size: 19px;
-    margin-bottom: 16px;
-}
-
-.trilha-niveis {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.item-nivel {
-    text-align: center;
-    padding: 18px 10px;
-
-    background-color: white;
-    border: 1px solid #eee;
-    border-radius: 10px;
-}
-
-.item-nivel .circulo {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    margin: 0 auto 10px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-weight: bold;
-    font-size: 17px;
+    gap: 12px;
+    padding: 18px 40px;
+    background-color: #5720b7;
     color: white;
 }
 
-.item-nivel.concluido .circulo {
-    background-color: #42a88d;
-}
-
-.item-nivel.atual .circulo {
-    background-color: #6724c7;
-    box-shadow: 0 0 0 4px rgba(103, 36, 199, 0.18);
-}
-
-.item-nivel.bloqueado .circulo {
-    background-color: #eee;
-    color: #999;
-}
-
-.item-nivel h4 {
-    color: #333;
-    font-size: 14px;
-    margin-bottom: 3px;
-}
-
-.item-nivel p {
-    color: #888;
-    font-size: 12px;
-}
-
-.grade-conquistas {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-}
-
-.conquista {
+.logo-publico {
     display: flex;
     align-items: center;
-    gap: 14px;
-
-    padding: 18px;
-
-    background-color: white;
-    border: 1px solid #eee;
-    border-radius: 10px;
-}
-
-.conquista-icone {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    flex-shrink: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 20px;
-}
-
-.conquista.desbloqueada .conquista-icone {
-    background-color: rgba(245, 166, 35, 0.18);
-}
-
-.conquista.bloqueada .conquista-icone {
-    background-color: #f0f0f0;
-    filter: grayscale(1);
-    opacity: 0.7;
-}
-
-.conquista.bloqueada h5,
-.conquista.bloqueada p {
-    opacity: 0.55;
-}
-
-.conquista h5 {
-    color: #333;
-    font-size: 14px;
-    margin-bottom: 2px;
-}
-
-.conquista p {
-    color: #888;
-    font-size: 12px;
-}
-
-
-
-/* ===========================================================
-   PÁGINA MEU PROGRESSO
-   =========================================================== */
-
-.grade-estatisticas {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.cartao-estatistica {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-
-    padding: 20px;
-
-    background-color: white;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-}
-
-.estatistica-icone {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    flex-shrink: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 20px;
-    color: white;
-}
-
-.estatistica-numero {
-    font-size: 22px;
-    font-weight: bold;
-    color: #333;
-    line-height: 1.1;
-}
-
-.estatistica-rotulo {
-    font-size: 12.5px;
-    color: #888;
-}
-
-.grade-progresso {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 18px;
-    align-items: start;
-    margin-bottom: 20px;
-}
-
-.cartao-progresso {
-    background-color: white;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-}
-
-.barras-grafico {
-    display: flex;
-    align-items: flex-end;
     gap: 10px;
-    height: 150px;
-    margin-top: 18px;
-}
-
-.coluna-grafico {
-    flex: 1;
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 8px;
-}
-
-.barra-grafico {
-    width: 100%;
-    max-width: 30px;
-    border-radius: 6px 6px 3px 3px;
-    background: linear-gradient(180deg, #7b4fe8, #5720b7);
-}
-
-.coluna-grafico .dia {
-    font-size: 11px;
-    color: #888;
+    font-size: 21px;
     font-weight: bold;
 }
 
-.linha-materia {
+.logo-publico .destaque {
+    color: #42a88d;
+}
+
+.acoes-publicas {
     display: flex;
     align-items: center;
     gap: 12px;
+}
+
+
+/* ----- Área central ----- */
+
+.conteudo-publico {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 50px 25px;
+}
+
+
+/* ----- Hero (título grande + ilustração) ----- */
+
+.hero-publico {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+.hero-texto {
+    flex: 1;
+    min-width: 280px;
+}
+
+.hero-texto h1 {
+    color: #392075;
+    font-size: 40px;
     margin-bottom: 14px;
 }
 
-.linha-materia:last-child {
-    margin-bottom: 0;
+.hero-texto h1 span {
+    color: #42a88d;
 }
 
-.linha-materia .nome {
-    width: 90px;
-    flex-shrink: 0;
-    font-size: 13px;
-    font-weight: bold;
-    color: #333;
+.hero-subtitulo {
+    color: #555;
+    font-size: 18px;
+    line-height: 1.6;
+    max-width: 480px;
+    margin-bottom: 28px;
 }
 
-.linha-materia .barra-fundo {
-    flex: 1;
-    background-color: #f0f0f0;
-    border-radius: 20px;
-    height: 8px;
-    overflow: hidden;
-}
-
-.linha-materia .barra-preenchida {
-    height: 100%;
-    border-radius: 20px;
-    background-color: #42a88d;
-}
-
-.linha-materia .porcentagem {
-    width: 34px;
-    text-align: right;
-    font-size: 12.5px;
-    color: #888;
-    font-weight: bold;
-    flex-shrink: 0;
-}
-
-.linha-sequencia {
+.hero-botoes {
     display: flex;
-    gap: 6px;
-    margin-top: 10px;
+    gap: 14px;
+    flex-wrap: wrap;
 }
 
-.dia-sequencia {
+.hero-ilustracao {
     flex: 1;
-    aspect-ratio: 1;
-    border-radius: 7px;
+    min-width: 260px;
+    display: flex;
+    justify-content: center;
+}
 
-    background-color: #f0f0f0;
+.hero-ilustracao svg {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+}
 
+
+/* ----- Faixa de números / destaques ----- */
+
+.destaques-publicos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+.destaque-item {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 14px;
+    min-width: 190px;
+    padding: 18px 22px;
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
 
-    font-size: 11px;
+.destaque-item span {
+    font-size: 30px;
+}
+
+.destaque-item strong {
+    display: block;
+    font-size: 20px;
+    color: #392075;
+}
+
+.destaque-item p {
+    font-size: 13px;
+    color: #777;
+}
+
+
+/* ----- Título das seções e chamada final ----- */
+
+.titulo-publico-secao {
+    text-align: center;
+    color: #392075;
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
+/* Link dentro da mensagem final ("Crie sua conta gratuita") */
+.mensagem a {
+    color: #6724c7;
     font-weight: bold;
-    color: #888;
+    text-decoration: none;
 }
 
-.dia-sequencia.preenchido {
-    background-color: #42a88d;
-    color: white;
+.mensagem a:hover {
+    text-decoration: underline;
 }
 
-@media (max-width: 860px) {
-    .grade-progresso {
-        grid-template-columns: 1fr;
+
+/* ----- Rodapé ----- */
+
+.rodape-publico {
+    text-align: center;
+    padding: 24px;
+    margin-top: 30px;
+    background-color: #f7f5fb;
+    color: #999;
+    font-size: 13px;
+}
+
+/* Celular: topo, hero e botões centralizados */
+@media (max-width: 700px) {
+
+    .topo-publico {
+        padding: 14px 20px;
+        justify-content: center;
+        text-align: center;
     }
+
+    .hero-texto h1 {
+        font-size: 30px;
+    }
+
+    .hero-texto {
+        text-align: center;
+    }
+
+    .hero-subtitulo {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-botoes {
+        justify-content: center;
+    }
+
 }
 
 
 
-/*login, cadastro, senha */
+/* ===========================================================
+   5. LOGIN, CADASTRO E ESQUECI A SENHA
+   Arquivos: login.html, cadastro.html, esqueci-senha.html
+   Também usa: .botao (seção 3) e .link-voltar (seção 3, só em esqueci-senha).
+   .botao-auth precisa ficar DEPOIS do .botao para sobrescrevê-lo.
+   =========================================================== */
+
+/* ----- Página e caixa do formulário ----- */
 
 body.pagina-auth {
     display: flex;
     align-items: center;
     justify-content: center;
-
     min-height: 100vh;
     width: 100%;
-
     background-color: #5720b7;
-
-
     padding: 60px 20px;
 }
 
-/* A "caixa fechada" com o formulário */
 .caixa-auth {
     width: 100%;
     max-width: 380px;
-
     background-color: white;
     border-radius: 12px;
     padding: 35px 30px;
-
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
 }
 
@@ -1069,11 +748,9 @@ body.pagina-auth {
     align-items: center;
     justify-content: center;
     gap: 8px;
-
     font-size: 22px;
     font-weight: bold;
     color: #392075;
-
     margin-bottom: 22px;
 }
 
@@ -1081,22 +758,8 @@ body.pagina-auth {
     color: #42a88d;
 }
 
-.link-voltar {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
 
-    font-size: 13px;
-    font-weight: bold;
-    color: #888;
-    text-decoration: none;
-
-    margin-bottom: 18px;
-}
-
-.link-voltar:hover {
-    color: #6724c7;
-}
+/* ----- Títulos ----- */
 
 .auth-titulo {
     text-align: center;
@@ -1111,6 +774,9 @@ body.pagina-auth {
     font-size: 14px;
     margin-bottom: 26px;
 }
+
+
+/* ----- Campos, erros e opções ----- */
 
 .campo {
     margin-bottom: 16px;
@@ -1127,13 +793,10 @@ body.pagina-auth {
 .campo input {
     width: 100%;
     padding: 12px 14px;
-
     border: 1px solid #ddd;
     border-radius: 8px;
-
     font-size: 14px;
     font-family: Arial, sans-serif;
-
     outline: none;
 }
 
@@ -1170,10 +833,8 @@ body.pagina-auth {
     display: flex;
     align-items: flex-start;
     gap: 8px;
-
     font-size: 12.5px;
     color: #666;
-
     margin-bottom: 20px;
 }
 
@@ -1193,6 +854,9 @@ body.pagina-auth {
     text-decoration: underline;
 }
 
+
+/* ----- Botão e mensagens de status ----- */
+
 .botao-auth {
     width: 100%;
     text-align: center;
@@ -1203,10 +867,8 @@ body.pagina-auth {
 
 .status-auth {
     display: none;
-
     margin-top: 14px;
     padding: 10px 12px;
-
     border-radius: 8px;
     font-size: 13px;
     text-align: center;
@@ -1216,6 +878,7 @@ body.pagina-auth {
     display: block;
 }
 
+/* Estado de erro: ainda não é usado pelo JavaScript (só o de sucesso) */
 .status-auth.erro {
     background-color: rgba(224, 85, 79, 0.1);
     border: 1px solid #e0554f;
@@ -1227,6 +890,9 @@ body.pagina-auth {
     border: 1px solid #42a88d;
     color: #368c76;
 }
+
+
+/* ----- Rodapé da caixa ----- */
 
 .rodape-auth {
     text-align: center;
@@ -1246,247 +912,105 @@ body.pagina-auth {
 }
 
 @media (max-width: 480px) {
+
     .caixa-auth {
         padding: 28px 22px;
     }
-}
 
-
-
-/*PAGINA INICIAL */
-
-.mensagem a {
-    color: #6724c7;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.mensagem a:hover {
-    text-decoration: underline;
 }
 
 
 
 /* ===========================================================
-   PÁGINA INICIAL PÚBLICA (Sobre Nós / Landing Page)
-   Esta página não usa o menu lateral do sistema, por isso
-   sobrescrevemos o "display: flex" padrão do body.
+   6. VÍDEO AULAS
+   Arquivo: video-aulas.html
+   Também usa: .filtros/.pilula e .busca-pagina (seção 3).
+   O modal do player fica no <style> da própria página.
    =========================================================== */
 
-body.pagina-publica {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-
-    min-height: 100vh;
-    width: 100%;
-
-    background-color: #ffffff;
-}
-
-/* Barra do topo da página pública (logo + botões de entrar/cadastrar) */
-.topo-publico {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-
-    padding: 18px 40px;
-
-    background-color: #5720b7;
-    color: white;
-}
-
-.logo-publico {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    font-size: 21px;
-    font-weight: bold;
-}
-
-.logo-publico .destaque {
-    color: #42a88d;
-}
-
-.acoes-publicas {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-/* Área central da página pública */
-.conteudo-publico {
-    max-width: 1100px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 50px 25px;
-}
-
-/* SEÇÃO HERO (título grande + ilustração) */
-.hero-publico {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    flex-wrap: wrap;
-
-    margin-bottom: 60px;
-}
-
-.hero-texto {
-    flex: 1;
-    min-width: 280px;
-}
-
-.hero-texto h1 {
-    color: #392075;
-    font-size: 40px;
-    margin-bottom: 14px;
-}
-
-.hero-texto h1 span {
-    color: #42a88d;
-}
-
-.hero-subtitulo {
-    color: #555;
-    font-size: 18px;
-    line-height: 1.6;
-    max-width: 480px;
-    margin-bottom: 28px;
-}
-
-.hero-botoes {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-}
-
-.hero-ilustracao {
-    flex: 1;
-    min-width: 260px;
-
-    display: flex;
-    justify-content: center;
-}
-
-.hero-ilustracao svg {
-    width: 100%;
-    max-width: 320px;
-    height: auto;
-}
-
-/* Faixa de números/destaques rápidos */
-.destaques-publicos {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-
-    margin-bottom: 60px;
 }
 
-.destaque-item {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-
-    min-width: 190px;
-    padding: 18px 22px;
-
+.video-card {
     background-color: white;
     border: 1px solid #eee;
     border-radius: 10px;
+    overflow: hidden;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
-.destaque-item span {
-    font-size: 30px;
+.video-thumb {
+    position: relative;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #5720b7, #42a88d);
+    color: white;
+    font-size: 40px;
 }
 
-.destaque-item strong {
-    display: block;
-    font-size: 20px;
-    color: #392075;
+.video-thumb .duracao {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 5px;
 }
 
-.destaque-item p {
-    font-size: 13px;
+.video-info {
+    padding: 15px;
+}
+
+.video-info h3 {
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.video-info .professor {
     color: #777;
+    font-size: 14px;
+    margin-bottom: 8px;
 }
 
-.titulo-publico-secao {
-    text-align: center;
-    color: #392075;
-    font-size: 24px;
-    margin-bottom: 25px;
-}
-
-/* Rodapé da página pública */
-.rodape-publico {
-    text-align: center;
-    padding: 24px;
-    margin-top: 30px;
-
-    background-color: #f7f5fb;
-    color: #999;
+.video-info .tempo {
+    color: #888;
     font-size: 13px;
 }
 
+/* Celular: um vídeo por linha */
 @media (max-width: 700px) {
-    .topo-publico {
-        padding: 14px 20px;
-        justify-content: center;
-        text-align: center;
+
+    .video-grid {
+        grid-template-columns: 1fr;
     }
 
-    .hero-texto h1 {
-        font-size: 30px;
-    }
-
-    .hero-texto {
-        text-align: center;
-    }
-
-    .hero-subtitulo {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .hero-botoes {
-        justify-content: center;
-    }
 }
 
 
 
-
-
-/*ATIVIDADES ALGEBRA*/
-
 /* ===========================================================
-   ATIVIDADES: RESOLVER QUESTÕES E RESULTADO
-   =========================================================== */
-/* ===========================================================
-   ATIVIDADE INTERATIVA (questões + resultado) - atividades.html
+   7. ATIVIDADES
+   Arquivo: atividades.html
+   Tela 1 (lista) usa a lista de itens, filtros e busca da seção 3.
+   Abaixo: tela 2 (questões) e tela 3 (resultado).
    =========================================================== */
 
-.oculto {
-    display: none !important;
-}
+/* ----- Tela 2: cabeçalho da atividade ----- */
 
-/* Cabeçalho da atividade */
 .ativ-cabecalho {
     display: flex;
     align-items: center;
     gap: 20px;
-
     padding: 22px;
     margin-bottom: 20px;
-
     background-color: #f3eefc;
     border: 1px solid #e3d9f7;
     border-radius: 12px;
@@ -1496,11 +1020,9 @@ body.pagina-publica {
     width: 70px;
     height: 70px;
     flex-shrink: 0;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background-color: #5720b7;
     border-radius: 12px;
     font-size: 32px;
@@ -1523,7 +1045,9 @@ body.pagina-publica {
     font-size: 13px;
 }
 
-/* Barra de progresso verde */
+
+/* ----- Tela 2: barra de progresso verde ----- */
+
 .ativ-progresso {
     display: flex;
     align-items: center;
@@ -1553,10 +1077,11 @@ body.pagina-publica {
     font-size: 14px;
 }
 
-/* Cartão da questão */
+
+/* ----- Tela 2: cartão da questão ----- */
+
 .ativ-questao {
     padding: 22px;
-
     background-color: white;
     border: 1px solid #e8e2f5;
     border-radius: 12px;
@@ -1606,26 +1131,24 @@ body.pagina-publica {
     border-radius: 8px;
 }
 
-/* Alternativas */
+
+/* ----- Tela 2: alternativas ----- */
+
 .ativ-alternativa {
     display: flex;
     align-items: center;
     gap: 18px;
-
     width: 100%;
     padding: 12px 15px;
     margin-bottom: 10px;
-
     background-color: white;
     border: 1px solid #e8e2f5;
     border-radius: 10px;
-
     color: #392075;
     font-size: 15px;
     text-align: left;
     font-family: Arial, sans-serif;
     cursor: pointer;
-
     transition: border-color 0.2s, background-color 0.2s;
 }
 
@@ -1638,16 +1161,13 @@ body.pagina-publica {
     width: 34px;
     height: 34px;
     flex-shrink: 0;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background-color: #e6dcfa;
     color: #5720b7;
     font-weight: bold;
     border-radius: 50%;
-
     transition: background-color 0.2s, color 0.2s;
 }
 
@@ -1669,15 +1189,15 @@ body.pagina-publica {
     100% { transform: scale(1); }
 }
 
-/* Rodapé com Anterior / Próxima */
+
+/* ----- Tela 2: rodapé com Anterior / Próxima ----- */
+
 .ativ-rodape {
     display: flex;
     justify-content: space-between;
     gap: 15px;
-
     margin-top: 20px;
     padding: 15px;
-
     background-color: #faf8ff;
     border: 1px solid #e8e2f5;
     border-radius: 12px;
@@ -1713,16 +1233,16 @@ body.pagina-publica {
     background-color: #368c76;
 }
 
-/* Tela de resultado */
+
+/* ----- Tela 3: resultado ----- */
+
 .res-topo {
     display: flex;
     align-items: center;
     gap: 25px;
     flex-wrap: wrap;
-
     padding: 22px;
     margin-bottom: 20px;
-
     background-color: #f3eefc;
     border: 1px solid #e3d9f7;
     border-radius: 12px;
@@ -1771,9 +1291,7 @@ body.pagina-publica {
     display: flex;
     align-items: center;
     gap: 15px;
-
     padding: 14px 18px;
-
     background-color: white;
     border: 1px solid #e8e2f5;
     border-radius: 10px;
@@ -1782,11 +1300,9 @@ body.pagina-publica {
 .res-item .num {
     width: 38px;
     height: 38px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background-color: #e6dcfa;
     color: #392075;
     font-weight: bold;
@@ -1827,7 +1343,9 @@ body.pagina-publica {
     border: none;
 }
 
+/* Celular: cabeçalho, resultado e botões ajustados */
 @media (max-width: 700px) {
+
     .ativ-cabecalho {
         flex-direction: column;
         align-items: flex-start;
@@ -1849,4 +1367,542 @@ body.pagina-publica {
     .ativ-btn-proxima {
         min-width: 0;
     }
+
+}
+
+
+
+/* ===========================================================
+   8. MEU PROGRESSO
+   Arquivo: meu-progresso.html
+   Também usa: .titulo-secao (seção 3).
+   =========================================================== */
+
+/* ----- Cartões de estatísticas ----- */
+
+.grade-estatisticas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.cartao-estatistica {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.estatistica-icone {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+}
+
+.estatistica-numero {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.1;
+}
+
+.estatistica-rotulo {
+    font-size: 12.5px;
+    color: #888;
+}
+
+
+/* ----- Grade dos cartões + gráfico de barras da semana ----- */
+
+.grade-progresso {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 18px;
+    align-items: start;
+    margin-bottom: 20px;
+}
+
+.cartao-progresso {
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.barras-grafico {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 150px;
+    margin-top: 18px;
+}
+
+.coluna-grafico {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.barra-grafico {
+    width: 100%;
+    max-width: 30px;
+    border-radius: 6px 6px 3px 3px;
+    background: linear-gradient(180deg, #7b4fe8, #5720b7);
+}
+
+.coluna-grafico .dia {
+    font-size: 11px;
+    color: #888;
+    font-weight: bold;
+}
+
+
+/* ----- Progresso por matéria ----- */
+
+.linha-materia {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.linha-materia:last-child {
+    margin-bottom: 0;
+}
+
+.linha-materia .nome {
+    width: 90px;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+}
+
+.linha-materia .barra-fundo {
+    flex: 1;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    height: 8px;
+    overflow: hidden;
+}
+
+.linha-materia .barra-preenchida {
+    height: 100%;
+    border-radius: 20px;
+    background-color: #42a88d;
+}
+
+.linha-materia .porcentagem {
+    width: 34px;
+    text-align: right;
+    font-size: 12.5px;
+    color: #888;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+
+/* ----- Sequência de estudos ----- */
+
+.linha-sequencia {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.dia-sequencia {
+    flex: 1;
+    aspect-ratio: 1;
+    border-radius: 7px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    color: #888;
+}
+
+.dia-sequencia.preenchido {
+    background-color: #42a88d;
+    color: white;
+}
+
+/* Telas médias: gráfico e progresso ficam um embaixo do outro */
+@media (max-width: 860px) {
+
+    .grade-progresso {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+
+/* ===========================================================
+   9. MATÉRIAS
+   Arquivo: materias.html
+   Quase tudo vem da seção 3: .containers/.container, .botao, .lista-itens,
+   .link-voltar, .oculto e .mensagem. O texto do conteúdo (fórmulas, etc.)
+   fica no <style> da própria página.
+   =========================================================== */
+
+/* Destaque do card da matéria em andamento */
+.container.selecionada {
+    border: 2px solid #42a88d;
+    box-shadow: 0 0 0 4px rgba(66, 168, 141, 0.15);
+}
+
+
+
+/* ===========================================================
+   10. QUIZZES
+   Arquivo: quizzes.html
+   Também usa: .filtros/.pilula e .botao (seção 3).
+   =========================================================== */
+
+.quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.quiz-card {
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.quiz-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1);
+}
+
+.quiz-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.quiz-icone {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+    background: linear-gradient(135deg, #5720b7, #42a88d);
+}
+
+.selo {
+    font-size: 11px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.selo.facil {
+    background-color: rgba(66, 168, 141, 0.15);
+    color: #368c76;
+}
+
+.selo.medio {
+    background-color: rgba(245, 166, 35, 0.18);
+    color: #a3690c;
+}
+
+.selo.dificil {
+    background-color: rgba(224, 85, 79, 0.15);
+    color: #c1443e;
+}
+
+.quiz-card h3 {
+    color: #333;
+    font-size: 16px;
+}
+
+.quiz-card .assunto {
+    color: #888;
+    font-size: 13px;
+    margin-top: -8px;
+}
+
+.quiz-meta {
+    display: flex;
+    gap: 14px;
+    color: #888;
+    font-size: 13px;
+}
+
+.quiz-card .botao {
+    text-align: center;
+    margin-top: 4px;
+}
+
+/* OBS: o CSS antigo tinha uma regra de celular para o .quiz-grid (1 coluna),
+   mas ela vinha ANTES da regra principal e por isso nunca funcionava.
+   Para ativar de verdade, tire o comentário do bloco abaixo:
+
+@media (max-width: 700px) {
+    .quiz-grid {
+        grid-template-columns: 1fr;
+    }
+}
+*/
+
+
+
+/* ===========================================================
+   11. NÍVEL DE APRENDIZAGEM
+   Arquivo: nivel-aprendizagem.html
+   Também usa: .titulo-secao (seção 3).
+   =========================================================== */
+
+/* ----- Cartão do nível atual + barra de XP ----- */
+
+.nivel-hero {
+    background: linear-gradient(120deg, #6724c7, #392075);
+    color: white;
+    border-radius: 12px;
+    padding: 28px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.nivel-selo-grande {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.nivel-hero-texto {
+    flex: 1;
+    min-width: 220px;
+}
+
+.nivel-hero-texto .rotulo {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.85;
+    font-weight: bold;
+}
+
+.nivel-hero-texto h2 {
+    margin: 4px 0 12px;
+    font-size: 22px;
+}
+
+.barra-xp-fundo {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    height: 10px;
+    max-width: 340px;
+    overflow: hidden;
+}
+
+.barra-xp-preenchida {
+    height: 100%;
+    background-color: #42a88d;
+    border-radius: 20px;
+}
+
+.xp-legenda {
+    font-size: 12.5px;
+    opacity: 0.9;
+    margin-top: 8px;
+}
+
+
+/* ----- Trilha de níveis ----- */
+
+.trilha-niveis {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.item-nivel {
+    text-align: center;
+    padding: 18px 10px;
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+.item-nivel .circulo {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 17px;
+    color: white;
+}
+
+.item-nivel.concluido .circulo {
+    background-color: #42a88d;
+}
+
+.item-nivel.atual .circulo {
+    background-color: #6724c7;
+    box-shadow: 0 0 0 4px rgba(103, 36, 199, 0.18);
+}
+
+.item-nivel.bloqueado .circulo {
+    background-color: #eee;
+    color: #999;
+}
+
+.item-nivel h4 {
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+
+.item-nivel p {
+    color: #888;
+    font-size: 12px;
+}
+
+
+/* ----- Conquistas ----- */
+
+.grade-conquistas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.conquista {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px;
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+.conquista-icone {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.conquista.desbloqueada .conquista-icone {
+    background-color: rgba(245, 166, 35, 0.18);
+}
+
+.conquista.bloqueada .conquista-icone {
+    background-color: #f0f0f0;
+    filter: grayscale(1);
+    opacity: 0.7;
+}
+
+.conquista.bloqueada h5,
+.conquista.bloqueada p {
+    opacity: 0.55;
+}
+
+.conquista h5 {
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.conquista p {
+    color: #888;
+    font-size: 12px;
+}
+
+
+
+/* ===========================================================
+   12. SEM USO NO MOMENTO
+   Nenhuma página usa estas classes. Não fazem nada e podem ser apagadas.
+   Ficaram aqui só para não mudar nada sem você decidir.
+   =========================================================== */
+
+/* .titulo era o título centralizado da antiga home (hoje a home usa .hero-texto) */
+.titulo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.titulo h1 {
+    color: #392075;
+    font-size: 35px;
+}
+
+.titulo h1 span {
+    color: #42a88d;
+}
+
+.titulo p {
+    color: #368c76;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+/* Nomes antigos (achv, stat, progress, level) que não existem mais no HTML */
+@media (max-width: 700px) {
+
+    .achv-grid,
+    .stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .progress-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .level-hero {
+        padding: 20px;
+    }
+
 }
